@@ -3,6 +3,7 @@ package com.easy.car.service;
 import com.easy.car.model.Type;
 import com.easy.car.repository.TypeRepo;
 import com.easy.car.util.ErrorLogUtil;
+import com.easy.car.util.ValidationUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -23,13 +24,14 @@ public class TypeService {
     }
 
     public ResponseEntity<?> save(String name, String imageUrl) {
-        if (typeRepo.findByName(name) != null || typeRepo.findByImageUrl(imageUrl) != null){
-            return new ResponseEntity<>(
-                    ErrorLogUtil.showError(100),
-                    HttpStatus.BAD_REQUEST);
-        }
+        if(!ValidationUtil.validateTypeName(name, typeRepo))
+            return new ResponseEntity<>(ErrorLogUtil.showError(101), HttpStatus.BAD_REQUEST);
+
+        if(!ValidationUtil.validateTypeImageUrl(imageUrl, typeRepo))
+            return new ResponseEntity<>(ErrorLogUtil.showError(102), HttpStatus.BAD_REQUEST);
 
         Type type = new Type();
+        
         type.setName(name);
         type.setImageUrl(imageUrl);
 

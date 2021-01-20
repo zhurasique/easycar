@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class CarApplication {
 
     public static void main(String[] args) {
-        ErrorLogUtil errorLogUtil = new ErrorLogUtil();
+        new ErrorLogUtil();
         SpringApplication.run(CarApplication.class, args);
     }
 
