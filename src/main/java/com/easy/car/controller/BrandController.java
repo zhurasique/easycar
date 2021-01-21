@@ -26,6 +26,6 @@ public class BrandController {
 
     @PostMapping
     public ResponseEntity<?> save(@RequestBody Brand brand) {
-        return brandService.save(brand.getName(), brand.getImageUrl());
+        return brandService.save(brand);
     }
 }

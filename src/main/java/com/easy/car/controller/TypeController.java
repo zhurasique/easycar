@@ -26,6 +26,6 @@ public class TypeController {
 
     @PostMapping
     public ResponseEntity<?> save(@RequestBody Type type) {
-        return typeService.save(type.getName(), type.getImageUrl());
+        return typeService.save(type);
     }
 }

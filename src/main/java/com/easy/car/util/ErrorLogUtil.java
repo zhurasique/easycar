@@ -16,7 +16,9 @@ public final class ErrorLogUtil {
     public void refreshErrorMap() {
         errorMap.put(101, "Type name" + correctOrExists);
         errorMap.put(102, "Type image" + correctOrExists);
-        errorMap.put(103, "Model name" + correctOrExists);
+        errorMap.put(103, "Brand name" + correctOrExists);
+        errorMap.put(104, "Model name" + correctOrExists);
+        errorMap.put(105, "Can't add Brand to Model. Wrong Brand data");
     }
 
     public static String showError(Integer key){

@@ -1,6 +1,7 @@
 package com.easy.car.service;
 
 import com.easy.car.model.Model;
+import com.easy.car.repository.BrandRepo;
 import com.easy.car.repository.ModelRepo;
 import com.easy.car.util.ErrorLogUtil;
 import com.easy.car.util.ValidationUtil;
@@ -14,24 +15,24 @@ import java.util.List;
 public class ModelService {
 
     private final ModelRepo modelRepo;
+    private final BrandRepo brandRepo;
 
-    public ModelService(ModelRepo modelRepo) {
+    public ModelService(ModelRepo modelRepo, BrandRepo brandRepo) {
         this.modelRepo = modelRepo;
+        this.brandRepo = brandRepo;
     }
 
     public List<Model> findAll(){
         return modelRepo.findAll();
     }
 
-    public ResponseEntity<?> save(String name, String imageUrl) {
+    public ResponseEntity<?> save(Model model) {
 
-//        if(!ValidationUtil.validateModelName(name, modelRepo))
-//            return new ResponseEntity<>(ErrorLogUtil.showError(103), HttpStatus.BAD_REQUEST);
+        if(!ValidationUtil.validateModelName(model.getName(), modelRepo))
+            return new ResponseEntity<>(ErrorLogUtil.showError(104), HttpStatus.BAD_REQUEST);
 
-        Model model = new Model();
-
-        model.setName(name);
-        model.setImageUrl(imageUrl);
+        if(!ValidationUtil.validateModelBrand(model.getBrand().getId(), brandRepo))
+            return new ResponseEntity<>(ErrorLogUtil.showError(105), HttpStatus.BAD_REQUEST);
 
         return new ResponseEntity<>(modelRepo.save(model), HttpStatus.OK);
     }

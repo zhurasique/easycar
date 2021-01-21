@@ -7,8 +7,16 @@ public class Model {
     @Id
     String id;
     String name;
-    String imageUrl;
 
+    Brand brand;
+
+    public Brand getBrand() {
+        return brand;
+    }
+
+    public void setBrand(Brand brand) {
+        this.brand = brand;
+    }
 
     public String getId() {
         return id;
@@ -26,11 +34,4 @@ public class Model {
         this.name = name;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
 }

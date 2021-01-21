@@ -23,17 +23,12 @@ public class TypeService {
         return typeRepo.findAll();
     }
 
-    public ResponseEntity<?> save(String name, String imageUrl) {
-        if(!ValidationUtil.validateTypeName(name, typeRepo))
+    public ResponseEntity<?> save(Type type) {
+        if(!ValidationUtil.validateTypeName(type.getName(), typeRepo))
             return new ResponseEntity<>(ErrorLogUtil.showError(101), HttpStatus.BAD_REQUEST);
 
-        if(!ValidationUtil.validateTypeImageUrl(imageUrl, typeRepo))
+        if(!ValidationUtil.validateTypeImageUrl(type.getImageUrl(), typeRepo))
             return new ResponseEntity<>(ErrorLogUtil.showError(102), HttpStatus.BAD_REQUEST);
-
-        Type type = new Type();
-        
-        type.setName(name);
-        type.setImageUrl(imageUrl);
 
         return new ResponseEntity<>(typeRepo.save(type), HttpStatus.OK);
     }

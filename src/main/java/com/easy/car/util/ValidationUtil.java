@@ -29,4 +29,14 @@ public abstract class ValidationUtil {
     public static boolean validateBrandName(String name, BrandRepo brandBrand) {
         return !isNull(name) && isCorrectLength(name, 2, 30) && isNull(brandBrand.findByName(name));
     }
+
+
+    // Model
+    public static boolean validateModelName(String name, ModelRepo modelRepo) {
+        return !isNull(name) && isCorrectLength(name, 1, 30) && isNull(modelRepo.findByName(name));
+    }
+
+    public static boolean validateModelBrand(String id, BrandRepo brandRepo) {
+        return !isNull(id) && !isNull(brandRepo.findById(id));
+    }
 }

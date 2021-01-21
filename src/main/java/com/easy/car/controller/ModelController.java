@@ -26,6 +26,6 @@ public class ModelController {
 
     @PostMapping
     public ResponseEntity<?> save(@RequestBody Model model) {
-        return modelService.save(model.getName(), model.getImageUrl());
+        return modelService.save(model);
     }
 }
