@@ -25,8 +25,8 @@ public class ModelService {
 
     public ResponseEntity<?> save(String name, String imageUrl) {
 
-        if(!ValidationUtil.validateModelName(name, modelRepo))
-            return new ResponseEntity<>(ErrorLogUtil.showError(103), HttpStatus.BAD_REQUEST);
+//        if(!ValidationUtil.validateModelName(name, modelRepo))
+//            return new ResponseEntity<>(ErrorLogUtil.showError(103), HttpStatus.BAD_REQUEST);
 
         Model model = new Model();
 

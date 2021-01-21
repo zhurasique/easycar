@@ -1,5 +1,6 @@
 package com.easy.car.util;
 
+import com.easy.car.repository.BrandRepo;
 import com.easy.car.repository.ModelRepo;
 import com.easy.car.repository.TypeRepo;
 
@@ -24,8 +25,8 @@ public abstract class ValidationUtil {
     }
 
 
-    // Model
-    public static boolean validateModelName(String name, ModelRepo modelRepo) {
-        return !isNull(name) && isCorrectLength(name, 2, 30) && isNull(modelRepo.findByName(name));
+    // Brand
+    public static boolean validateBrandName(String name, BrandRepo brandBrand) {
+        return !isNull(name) && isCorrectLength(name, 2, 30) && isNull(brandBrand.findByName(name));
     }
 }
