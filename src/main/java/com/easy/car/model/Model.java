@@ -10,6 +10,7 @@ public class Model {
 
     Brand brand;
 
+
     public Brand getBrand() {
         return brand;
     }

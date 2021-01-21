@@ -15,10 +15,13 @@ public final class ErrorLogUtil {
 
     public void refreshErrorMap() {
         errorMap.put(101, "Type name" + correctOrExists);
-        errorMap.put(102, "Type image" + correctOrExists);
+        errorMap.put(102, "Type image URL" + correctOrExists);
         errorMap.put(103, "Brand name" + correctOrExists);
         errorMap.put(104, "Model name" + correctOrExists);
-        errorMap.put(105, "Can't add Brand to Model. Wrong Brand data");
+        errorMap.put(105, "Can't add Brand to Model. Wrong or empty Brand data");
+        errorMap.put(106, "Can't add Type to TypeModel. Wrong or empty Type data");
+        errorMap.put(107, "Can't add Model to TypeModel. Wrong or empty Model data");
+        errorMap.put(108, "Pair Type and Model already exists in database");
     }
 
     public static String showError(Integer key){

@@ -1,13 +1,22 @@
 package com.easy.car.util;
 
+import com.easy.car.model.Model;
+import com.easy.car.model.Type;
 import com.easy.car.repository.BrandRepo;
 import com.easy.car.repository.ModelRepo;
+import com.easy.car.repository.TypeModelRepo;
 import com.easy.car.repository.TypeRepo;
+
+import java.util.Optional;
 
 public abstract class ValidationUtil {
 
     private static boolean isNull(Object o) {
         return o == null;
+    }
+
+    private static boolean isOptionalEmpty(Optional<?> optional) {
+        return optional.isPresent();
     }
 
     private static boolean isCorrectLength(Object o, int minLength, int maxLength) {
@@ -37,6 +46,20 @@ public abstract class ValidationUtil {
     }
 
     public static boolean validateModelBrand(String id, BrandRepo brandRepo) {
-        return !isNull(id) && !isNull(brandRepo.findById(id));
+        return !isNull(id) && isOptionalEmpty(brandRepo.findById(id));
+    }
+
+
+    // TypeModel
+    public static boolean validateTypeModelType(String id, TypeRepo typeRepo) {
+        return !isNull(id) && isOptionalEmpty(typeRepo.findById(id));
+    }
+
+    public static boolean validateTypeModelModel(String id, ModelRepo modelRepo) {
+        return !isNull(id) && isOptionalEmpty(modelRepo.findById(id));
+    }
+
+    public static boolean validateTypeModel(Type type, Model model, TypeModelRepo typeModelRepo) {
+        return typeModelRepo.findByTypeInAndModelIn(type, model).isEmpty();
     }
 }
