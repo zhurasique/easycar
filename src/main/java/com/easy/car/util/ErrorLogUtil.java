@@ -8,6 +8,8 @@ public final class ErrorLogUtil {
     private static Map<Integer, String> errorMap = new LinkedHashMap<>();
 
     private final String correctOrExists = " must be correct or already exists in database";
+    private final String correct = " must be correct";
+    private final String exists = " already exists in database";
 
     public ErrorLogUtil(){
         refreshErrorMap();
@@ -21,7 +23,10 @@ public final class ErrorLogUtil {
         errorMap.put(105, "Can't add Brand to Model. Wrong or empty Brand data");
         errorMap.put(106, "Can't add Type to TypeModel. Wrong or empty Type data");
         errorMap.put(107, "Can't add Model to TypeModel. Wrong or empty Model data");
-        errorMap.put(108, "Pair Type and Model already exists in database");
+        errorMap.put(108, "Pair Type and Model" + exists);
+        errorMap.put(109, "Generation name" + correct);
+        errorMap.put(110, "Generation years" + correct);
+        errorMap.put(111, "Generation model" + correct);
     }
 
     public static String showError(Integer key){

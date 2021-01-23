@@ -26,13 +26,14 @@ public class ModelService {
         return modelRepo.findAll();
     }
 
-    public ResponseEntity<?> save(Model model) {
+    public ResponseEntity<?> save(Model model) throws Exception {
 
         if(!ValidationUtil.validateModelName(model.getName(), modelRepo))
             return new ResponseEntity<>(ErrorLogUtil.showError(104), HttpStatus.BAD_REQUEST);
 
         if(!ValidationUtil.validateModelBrand(model.getBrand().getId(), brandRepo))
             return new ResponseEntity<>(ErrorLogUtil.showError(105), HttpStatus.BAD_REQUEST);
+        model.setBrand(brandRepo.findById(model.getBrand().getId()).orElseThrow(Exception::new));
 
         return new ResponseEntity<>(modelRepo.save(model), HttpStatus.OK);
     }

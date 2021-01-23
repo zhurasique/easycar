@@ -25,7 +25,7 @@ public class ModelController {
     }
 
     @PostMapping
-    public ResponseEntity<?> save(@RequestBody Model model) {
+    public ResponseEntity<?> save(@RequestBody Model model) throws Exception {
         return modelService.save(model);
     }
 }

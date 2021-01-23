@@ -5,11 +5,11 @@ import org.springframework.data.annotation.Id;
 public class TypeModel {
 
     @Id
-    String id;
+    private String id;
 
-    Model model;
+    private Model model;
 
-    Type type;
+    private Type type;
 
 
     public String getId() {

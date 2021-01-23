@@ -5,10 +5,10 @@ import org.springframework.data.annotation.Id;
 public class Model {
 
     @Id
-    String id;
-    String name;
+    private String id;
+    private String name;
 
-    Brand brand;
+    private Brand brand;
 
 
     public Brand getBrand() {

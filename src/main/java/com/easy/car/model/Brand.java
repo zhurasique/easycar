@@ -5,9 +5,9 @@ import org.springframework.data.annotation.Id;
 public class Brand {
 
     @Id
-    String id;
-    String name;
-    String imageUrl;
+    private String id;
+    private String name;
+    private String imageUrl;
 
 
     public String getId() {

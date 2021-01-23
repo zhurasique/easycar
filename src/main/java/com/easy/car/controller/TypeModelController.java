@@ -25,7 +25,7 @@ public class TypeModelController {
     }
 
     @PostMapping
-    public ResponseEntity<?> save(@RequestBody TypeModel typeModel) {
+    public ResponseEntity<?> save(@RequestBody TypeModel typeModel) throws Exception {
         return typeModelService.save(typeModel);
     }
 }
