@@ -74,4 +74,10 @@ public abstract class ValidationUtil {
     public static boolean validateGenerationYears(int yearFrom, int yearTo) {
         return yearFrom >= 1885 && yearFrom <= yearTo;
     }
+
+
+    // Equipment
+    public static boolean validateEquipmentName(String name, EquipmentRepo equipmentRepo) {
+        return !isNull(name) && isNull(equipmentRepo.findByName(name));
+    }
 }
