@@ -1,22 +1,35 @@
 package com.service.base.service;
 
+import com.service.base.VO.Image;
 import com.service.base.model.Brand;
 import com.service.base.repository.BrandRepo;
 import com.service.base.util.ErrorLogUtil;
+import com.service.base.util.MultipartFileConvertUtil;
 import com.service.base.util.ValidationUtil;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.bson.BsonBinarySubType;
+import org.bson.types.Binary;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @Service
 public class BrandService {
 
+    private final RestTemplate restTemplate;
+
     private final BrandRepo brandRepo;
 
-    public BrandService(BrandRepo brandRepo) {
+    public BrandService(RestTemplate restTemplate, BrandRepo brandRepo) {
+        this.restTemplate = restTemplate;
         this.brandRepo = brandRepo;
     }
 
@@ -28,11 +41,33 @@ public class BrandService {
         return brandRepo.findById(id).orElseThrow(Exception::new);
     }
 
-    public ResponseEntity<?> save(Brand brand, MultipartFile multipartFile) {
+    public ResponseEntity<?> save(String name, MultipartFile multipartFile) throws IOException, JSONException {
 
-        if(!ValidationUtil.validateBrandName(brand.getName(), brandRepo))
+        if(!ValidationUtil.validateBrandName(name, brandRepo))
             return new ResponseEntity<>(ErrorLogUtil.showError(103), HttpStatus.BAD_REQUEST);
+
+        MultiValueMap<String, Object> bodyMap = new LinkedMultiValueMap<>();
+        bodyMap.add("multipartFile", new FileSystemResource(MultipartFileConvertUtil.convert(multipartFile)));
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+
+        HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(bodyMap, headers);
+
+        ResponseEntity<String> response = restTemplate.postForEntity("http://IMAGE-SERVICE/api/images", requestEntity, String.class);
+
+        JSONObject jsonObj = new JSONObject(response.getBody());
+
+        Image image = new Image();
+        image.setId(jsonObj.getString("id"));
+        image.setImage(new Binary(BsonBinarySubType.BINARY, multipartFile.getBytes()));
+
+        Brand brand = new Brand();
+        brand.setName(name);
+        brand.setImage(image);
 
         return new ResponseEntity<>(brandRepo.save(brand), HttpStatus.OK);
     }
+
+
 }

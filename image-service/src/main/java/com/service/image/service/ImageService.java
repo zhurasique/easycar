@@ -29,7 +29,7 @@ public class ImageService {
     public ResponseEntity<?> save(MultipartFile multipartFile) throws IOException {
 
         if(!ValidationUtil.validateImageData(multipartFile))
-            return new ResponseEntity<>(ErrorLogUtil.showError(113), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(ErrorLogUtil.showError(101), HttpStatus.BAD_REQUEST);
 
         Image image = new Image();
         image.setImage(new Binary(BsonBinarySubType.BINARY, multipartFile.getBytes()));

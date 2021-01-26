@@ -1,5 +1,6 @@
 package com.service.base.model;
 
+import com.service.base.VO.Image;
 import org.springframework.data.annotation.Id;
 
 public class Brand {
@@ -7,7 +8,7 @@ public class Brand {
     @Id
     private String id;
     private String name;
-    private String imageUrl;
+    private Image image;
 
 
     public String getId() {
@@ -26,11 +27,11 @@ public class Brand {
         this.name = name;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public Image getImage() {
+        return image;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImage(Image image) {
+        this.image = image;
     }
 }
