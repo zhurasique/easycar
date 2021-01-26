@@ -26,7 +26,7 @@ public class ImageController {
     }
 
     @PostMapping
-    public ResponseEntity<?> save(MultipartFile multipartFile) throws IOException {
-        return imageService.save(multipartFile);
+    public ResponseEntity<?> save(MultipartFile image) throws IOException {
+        return imageService.save(image);
     }
 }

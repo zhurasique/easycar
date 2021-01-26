@@ -8,6 +8,7 @@ public class Brand {
     @Id
     private String id;
     private String name;
+
     private Image image;
 
 

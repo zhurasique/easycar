@@ -28,10 +28,6 @@ public abstract class ValidationUtil {
         return !isNull(name) && isCorrectLength(name, 3, 30) && isNull(typeRepo.findByName(name));
     }
 
-    public static boolean validateTypeImageUrl(String imageUrl, TypeRepo typeRepo) {
-        return !isNull(imageUrl) && isCorrectLength(imageUrl, 3, 150) && isNull(typeRepo.findByImageUrl(imageUrl));
-    }
-
 
     // Brand
     public static boolean validateBrandName(String name, BrandRepo brandBrand) {
@@ -82,9 +78,4 @@ public abstract class ValidationUtil {
         return !isNull(name) && isNull(equipmentRepo.findByName(name));
     }
 
-
-    // Image
-    public static boolean validateImageData(MultipartFile multipartFile) throws IOException {
-        return multipartFile.getBytes().length > 0;
-    }
 }
