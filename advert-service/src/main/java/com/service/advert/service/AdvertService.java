@@ -1,5 +1,6 @@
 package com.service.advert.service;
 
+import com.service.advert.VO.Brand;
 import com.service.advert.model.Advert;
 import com.service.advert.repository.AdvertRepo;
 import com.service.advert.util.ErrorLogUtil;
@@ -31,6 +32,8 @@ public class AdvertService {
 
         if(!ValidationUtil.validateAdvertBrand(advert.getBrand().getId(), restTemplate))
             return new ResponseEntity<>(ErrorLogUtil.showError(100), HttpStatus.BAD_REQUEST);
+
+        advert.setBrand(restTemplate.getForObject("http://localhost:8081/api/brands/" + advert.getBrand().getId(), Brand.class));
 
         return new ResponseEntity<>(advertRepo.save(advert), HttpStatus.OK);
     }
