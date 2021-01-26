@@ -5,6 +5,7 @@ import com.service.base.service.BrandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class BrandController {
     }
 
     @PostMapping
-    public ResponseEntity<?> save(@RequestBody Brand brand) {
-        return brandService.save(brand);
+    public ResponseEntity<?> save(@RequestBody Brand brand, MultipartFile multipartFile) {
+        return brandService.save(brand, multipartFile);
     }
 }

@@ -3,7 +3,9 @@ package com.service.base.util;
 import com.service.base.model.Model;
 import com.service.base.model.Type;
 import com.service.base.repository.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.Optional;
 
 public abstract class ValidationUtil {
@@ -78,5 +80,11 @@ public abstract class ValidationUtil {
     // Equipment
     public static boolean validateEquipmentName(String name, EquipmentRepo equipmentRepo) {
         return !isNull(name) && isNull(equipmentRepo.findByName(name));
+    }
+
+
+    // Image
+    public static boolean validateImageData(MultipartFile multipartFile) throws IOException {
+        return multipartFile.getBytes().length > 0;
     }
 }
