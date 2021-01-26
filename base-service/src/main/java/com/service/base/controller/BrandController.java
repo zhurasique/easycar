@@ -2,11 +2,13 @@ package com.service.base.controller;
 
 import com.service.base.model.Brand;
 import com.service.base.service.BrandService;
+import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -31,7 +33,7 @@ public class BrandController {
     }
 
     @PostMapping
-    public ResponseEntity<?> save(@RequestBody Brand brand, MultipartFile multipartFile) {
-        return brandService.save(brand, multipartFile);
+    public ResponseEntity<?> save(@RequestPart(value="name") String name, @RequestPart(value = "image") MultipartFile multipartFile) throws IOException, JSONException {
+        return brandService.save(name, multipartFile);
     }
 }
