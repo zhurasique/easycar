@@ -1,7 +1,9 @@
-package com.service.base.service;
+package com.service.image.service;
 
-import com.service.base.model.Image;
-import com.service.base.repository.ImageRepo;
+import com.service.image.model.Image;
+import com.service.image.repository.ImageRepo;
+import com.service.image.util.ErrorLogUtil;
+import com.service.image.util.ValidationUtil;
 import org.bson.BsonBinarySubType;
 import org.bson.types.Binary;
 import org.springframework.http.HttpStatus;
@@ -25,6 +27,9 @@ public class ImageService {
     }
 
     public ResponseEntity<?> save(MultipartFile multipartFile) throws IOException {
+
+        if(!ValidationUtil.validateImageData(multipartFile))
+            return new ResponseEntity<>(ErrorLogUtil.showError(113), HttpStatus.BAD_REQUEST);
 
         Image image = new Image();
         image.setImage(new Binary(BsonBinarySubType.BINARY, multipartFile.getBytes()));

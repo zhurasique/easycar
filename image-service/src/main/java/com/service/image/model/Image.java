@@ -1,4 +1,4 @@
-package com.service.base.model;
+package com.service.image.model;
 
 import org.bson.types.Binary;
 import org.springframework.data.annotation.Id;

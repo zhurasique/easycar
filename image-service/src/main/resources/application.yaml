@@ -1,5 +1,5 @@
 server:
-  port: 8081
+  port: 8083
 
 eureka:
   client:
@@ -12,4 +12,4 @@ eureka:
 
 spring:
   application:
-    name: BASE-SERVICE
+    name: IMAGE-SERVICE

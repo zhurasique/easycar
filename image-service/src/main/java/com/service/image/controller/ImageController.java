@@ -1,7 +1,7 @@
-package com.service.base.controller;
+package com.service.image.controller;
 
-import com.service.base.model.Image;
-import com.service.base.service.ImageService;
+import com.service.image.model.Image;
+import com.service.image.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

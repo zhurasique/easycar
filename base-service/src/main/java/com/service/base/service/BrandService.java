@@ -7,6 +7,7 @@ import com.service.base.util.ValidationUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -27,7 +28,7 @@ public class BrandService {
         return brandRepo.findById(id).orElseThrow(Exception::new);
     }
 
-    public ResponseEntity<?> save(Brand brand) {
+    public ResponseEntity<?> save(Brand brand, MultipartFile multipartFile) {
 
         if(!ValidationUtil.validateBrandName(brand.getName(), brandRepo))
             return new ResponseEntity<>(ErrorLogUtil.showError(103), HttpStatus.BAD_REQUEST);

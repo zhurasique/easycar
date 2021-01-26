@@ -33,7 +33,7 @@ public class AdvertService {
         if(!ValidationUtil.validateAdvertBrand(advert.getBrand().getId(), restTemplate))
             return new ResponseEntity<>(ErrorLogUtil.showError(100), HttpStatus.BAD_REQUEST);
 
-        advert.setBrand(restTemplate.getForObject("http://localhost:8081/api/brands/" + advert.getBrand().getId(), Brand.class));
+        advert.setBrand(restTemplate.getForObject("http://BASE-SERVICE/api/brands/" + advert.getBrand().getId(), Brand.class));
 
         return new ResponseEntity<>(advertRepo.save(advert), HttpStatus.OK);
     }

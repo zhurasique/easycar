@@ -28,6 +28,7 @@ public final class ErrorLogUtil {
         errorMap.put(110, "Generation years" + correct);
         errorMap.put(111, "Generation model" + correct);
         errorMap.put(112, "Equipment name" + correctOrExists);
+        errorMap.put(113, "Image" + correct);
     }
 
     public static String showError(Integer key){
