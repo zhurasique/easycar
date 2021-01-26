@@ -4,7 +4,7 @@ import com.service.base.VO.Image;
 import com.service.base.model.Brand;
 import com.service.base.repository.BrandRepo;
 import com.service.base.util.ErrorLogUtil;
-import com.service.base.util.MultipartFileConvertUtil;
+import com.service.base.util.MultipartFileUtil;
 import com.service.base.util.ValidationUtil;
 import org.bson.BsonBinarySubType;
 import org.bson.types.Binary;
@@ -46,20 +46,8 @@ public class BrandService {
         if(!ValidationUtil.validateBrandName(name, brandRepo))
             return new ResponseEntity<>(ErrorLogUtil.showError(103), HttpStatus.BAD_REQUEST);
 
-        MultiValueMap<String, Object> bodyMap = new LinkedMultiValueMap<>();
-        bodyMap.add("multipartFile", new FileSystemResource(MultipartFileConvertUtil.convert(multipartFile)));
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
-
-        HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(bodyMap, headers);
-
-        ResponseEntity<String> response = restTemplate.postForEntity("http://IMAGE-SERVICE/api/images", requestEntity, String.class);
-
-        JSONObject jsonObj = new JSONObject(response.getBody());
-
         Image image = new Image();
-        image.setId(jsonObj.getString("id"));
+        image.setId(MultipartFileUtil.postForEntity(multipartFile, restTemplate, "http://IMAGE-SERVICE/api/images").getString("id"));
         image.setImage(new Binary(BsonBinarySubType.BINARY, multipartFile.getBytes()));
 
         Brand brand = new Brand();

@@ -33,7 +33,7 @@ public class BrandController {
     }
 
     @PostMapping
-    public ResponseEntity<?> save(@RequestPart(value="name") String name, @RequestPart(value = "image") MultipartFile multipartFile) throws IOException, JSONException {
-        return brandService.save(name, multipartFile);
+    public ResponseEntity<?> save(@RequestPart(name = "name") String name, @RequestPart(name = "image") MultipartFile image) throws IOException, JSONException {
+        return brandService.save(name, image);
     }
 }
