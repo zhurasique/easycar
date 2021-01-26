@@ -25,7 +25,7 @@ public class ImageService {
     }
 
     public ResponseEntity<?> save(MultipartFile multipartFile) throws IOException {
-        System.out.println(multipartFile);
+
         Image image = new Image();
         image.setImage(new Binary(BsonBinarySubType.BINARY, multipartFile.getBytes()));
 
