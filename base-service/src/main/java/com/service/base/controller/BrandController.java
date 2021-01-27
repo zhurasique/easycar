@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/brands")
+@RequestMapping("api/base-service/brands")
 public class BrandController {
 
     private final BrandService brandService;

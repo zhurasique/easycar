@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/type_model")
+@RequestMapping("api/base-service/type_model")
 public class TypeModelController {
 
     private final TypeModelService typeModelService;

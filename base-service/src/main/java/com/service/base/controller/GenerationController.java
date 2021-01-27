@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/generations")
+@RequestMapping("api/base-service/generations")
 public class GenerationController {
 
     private final GenerationService generationService;

@@ -9,12 +9,9 @@ import com.service.base.util.ValidationUtil;
 import org.bson.BsonBinarySubType;
 import org.bson.types.Binary;
 import org.json.JSONException;
-import org.json.JSONObject;
-import org.springframework.core.io.FileSystemResource;
-import org.springframework.http.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -43,7 +40,7 @@ public class TypeService {
             return new ResponseEntity<>(ErrorLogUtil.showError(101), HttpStatus.BAD_REQUEST);
 
         Image image = new Image();
-        image.setId(MultipartFileUtil.postForEntity(multipartFile, restTemplate, "http://IMAGE-SERVICE/api/images").getString("id"));
+        image.setId(MultipartFileUtil.postForEntity(multipartFile, restTemplate, "http://API-GATEWAY/api/image-service/images").getString("id"));
         image.setImage(new Binary(BsonBinarySubType.BINARY, multipartFile.getBytes()));
 
         Type type = new Type();
