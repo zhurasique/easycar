@@ -1,0 +1,10 @@
+server:
+  port: 9295
+
+spring:
+  application:
+    name: SERVICE-TRACK
+
+hystrix:
+  dashboard:
+    proxy-stream-allow-list: "*"

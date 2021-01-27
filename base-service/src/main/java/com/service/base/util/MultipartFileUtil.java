@@ -34,9 +34,12 @@ public abstract class MultipartFileUtil {
         return convFile;
     }
 
+
     public static JSONObject postForEntity(MultipartFile multipartFile, RestTemplate restTemplate, String endpoint) throws JSONException {
         MultiValueMap<String, Object> bodyMap = new LinkedMultiValueMap<>();
-        bodyMap.add("image", new FileSystemResource(MultipartFileUtil.convert(multipartFile)));
+
+        File file = convert(multipartFile);
+        bodyMap.add("image", new FileSystemResource(file));
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.MULTIPART_FORM_DATA);
@@ -45,6 +48,8 @@ public abstract class MultipartFileUtil {
 
         ResponseEntity<String> response = restTemplate.postForEntity(endpoint, requestEntity, String.class);
 
+        file.delete();
+        
         return new JSONObject(response.getBody());
     }
 }
