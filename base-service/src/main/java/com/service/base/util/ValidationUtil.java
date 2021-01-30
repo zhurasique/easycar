@@ -78,4 +78,15 @@ public abstract class ValidationUtil {
         return !isNull(name) && isNull(equipmentRepo.findByName(name));
     }
 
+
+    // Engine
+    public static boolean validateEngineCapacity(int capacity, EngineRepo engineRepo) {
+        return !isNull(capacity) && capacity >= 50 && capacity <= 12000 && isNull(engineRepo.findByCapacity(capacity));
+    }
+
+
+    // Power
+    public static boolean validatePower(int power, PowerRepo powerRepo) {
+        return !isNull(power) && power >= 50 && power <= 1500 && isNull(powerRepo.findByPower(power));
+    }
 }
