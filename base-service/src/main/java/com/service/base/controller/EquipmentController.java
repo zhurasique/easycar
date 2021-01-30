@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/base-service/equipments")
+@RequestMapping("api/base-service/equipment")
 public class EquipmentController {
 
     private final EquipmentService equipmentService;

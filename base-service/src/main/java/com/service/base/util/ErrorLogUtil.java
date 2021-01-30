@@ -29,6 +29,8 @@ public final class ErrorLogUtil {
         errorMap.put(111, "Generation model" + correct);
         errorMap.put(112, "Equipment name" + correctOrExists);
         errorMap.put(113, "Image" + correct);
+        errorMap.put(114, "Engine capacity" + exists);
+        errorMap.put(115, "Power" + correctOrExists);
     }
 
     public static String showError(Integer key){

@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/base-service/types")
+@RequestMapping("api/base-service/type")
 public class TypeController {
 
     private final TypeService typeService;
