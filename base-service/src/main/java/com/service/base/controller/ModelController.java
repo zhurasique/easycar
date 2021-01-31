@@ -2,7 +2,6 @@ package com.service.base.controller;
 
 import com.service.base.model.Model;
 import com.service.base.service.ModelService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +13,6 @@ public class ModelController {
 
     private final ModelService modelService;
 
-    @Autowired
     public ModelController(ModelService modelService) {
         this.modelService = modelService;
     }

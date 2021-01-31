@@ -112,4 +112,10 @@ public abstract class ValidationUtil {
     public static boolean validateTransmission(String name, TransmissionRepo transmissionRepo) {
         return !isNull(name) && isCorrectLength(name, 3, 15) && isNull(transmissionRepo.findByName(name));
     }
+
+
+    // Drive
+    public static boolean validateDrive(String name, DriveRepo driveRepo) {
+        return !isNull(name) && isCorrectLength(name, 3, 15) && isNull(driveRepo.findByName(name));
+    }
 }
