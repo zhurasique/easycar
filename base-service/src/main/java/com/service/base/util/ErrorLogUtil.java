@@ -31,6 +31,10 @@ public final class ErrorLogUtil {
         errorMap.put(113, "Image" + correct);
         errorMap.put(114, "Engine capacity" + exists);
         errorMap.put(115, "Power" + correctOrExists);
+        errorMap.put(116, "Color color" + correctOrExists);
+        errorMap.put(117, "Color pattern" + correctOrExists);
+        errorMap.put(118, "Fuel name" + correctOrExists);
+        errorMap.put(119, "Transmission name" + correctOrExists);
     }
 
     public static String showError(Integer key){
