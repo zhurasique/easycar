@@ -2,7 +2,6 @@ package com.service.base.controller;
 
 import com.service.base.model.TypeModel;
 import com.service.base.service.TypeModelService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +13,6 @@ public class TypeModelController {
 
     private final TypeModelService typeModelService;
 
-    @Autowired
     public TypeModelController(TypeModelService typeModelService) {
         this.typeModelService = typeModelService;
     }

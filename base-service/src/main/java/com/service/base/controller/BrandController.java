@@ -3,7 +3,6 @@ package com.service.base.controller;
 import com.service.base.model.Brand;
 import com.service.base.service.BrandService;
 import org.json.JSONException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,7 +16,6 @@ public class BrandController {
 
     private final BrandService brandService;
 
-    @Autowired
     public BrandController(BrandService brandService) {
         this.brandService = brandService;
     }

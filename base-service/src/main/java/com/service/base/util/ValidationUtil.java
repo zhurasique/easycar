@@ -1,5 +1,6 @@
 package com.service.base.util;
 
+import com.service.base.model.Fuel;
 import com.service.base.model.Model;
 import com.service.base.model.Type;
 import com.service.base.repository.*;
@@ -88,5 +89,33 @@ public abstract class ValidationUtil {
     // Power
     public static boolean validatePower(int power, PowerRepo powerRepo) {
         return !isNull(power) && power >= 50 && power <= 1500 && isNull(powerRepo.findByPower(power));
+    }
+
+
+    // Color
+    public static boolean validateColorColor(String color, ColorRepo colorRepo) {
+        return !isNull(color) && isCorrectLength(color, 3, 15) && isNull(colorRepo.findByColor(color));
+    }
+
+    public static boolean validateColorPattern(String pattern, ColorRepo colorRepo) {
+        return !isNull(pattern) && isCorrectLength(pattern, 7, 7) && pattern.charAt(0) == '#' && isNull(colorRepo.findByPattern(pattern));
+    }
+
+
+    // Fuel
+    public static boolean validateFuelName(String name, FuelRepo fuelRepo) {
+        return !isNull(name) && isCorrectLength(name, 3, 15) && isNull(fuelRepo.findByName(name));
+    }
+
+
+    // Transmission
+    public static boolean validateTransmission(String name, TransmissionRepo transmissionRepo) {
+        return !isNull(name) && isCorrectLength(name, 3, 15) && isNull(transmissionRepo.findByName(name));
+    }
+
+
+    // Drive
+    public static boolean validateDrive(String name, DriveRepo driveRepo) {
+        return !isNull(name) && isCorrectLength(name, 3, 15) && isNull(driveRepo.findByName(name));
     }
 }

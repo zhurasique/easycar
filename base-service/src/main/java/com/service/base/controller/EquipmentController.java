@@ -2,7 +2,6 @@ package com.service.base.controller;
 
 import com.service.base.model.Equipment;
 import com.service.base.service.EquipmentService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +13,6 @@ public class EquipmentController {
 
     private final EquipmentService equipmentService;
 
-    @Autowired
     public EquipmentController(EquipmentService equipmentService) {
         this.equipmentService = equipmentService;
     }
