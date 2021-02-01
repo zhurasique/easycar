@@ -1,0 +1,10 @@
+version: "3"
+
+services:
+  service-regestry:
+    build:
+      dockerfile: Dockerfile
+    image: service-regestry-image
+    container_name: service-regestry-image
+    ports:
+    - "8761:8761"
