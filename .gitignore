@@ -1,0 +1,11 @@
+.local
+.project
+.classpath
+.settings
+.metadata
+.idea
+.mvn
+exporting
+target
+*.iml
+*.mdg
