@@ -1,0 +1,9 @@
+server:
+  port: 8081
+
+spring:
+  data:
+    mongodb:
+      host: mongodb
+      database: easycar__base-service
+      port: 27017
