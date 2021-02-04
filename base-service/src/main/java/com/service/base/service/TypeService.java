@@ -40,7 +40,7 @@ public class TypeService {
             return new ResponseEntity<>(ErrorLogUtil.showError(101), HttpStatus.BAD_REQUEST);
 
         Image image = new Image();
-        image.setId(MultipartFileUtil.postForEntity(multipartFile, restTemplate, "http://gateway/api/image-service/images").getString("id"));
+        image.setId(MultipartFileUtil.postForEntity(multipartFile, restTemplate, "http://gateway/api/image-service/image").getString("id"));
         image.setImage(new Binary(BsonBinarySubType.BINARY, multipartFile.getBytes()));
 
         Type type = new Type();
