@@ -1,6 +1,0 @@
-server:
-  port: 8761
-
-hystrix:
-  dashboard:
-    proxy-stream-allow-list: "*"
