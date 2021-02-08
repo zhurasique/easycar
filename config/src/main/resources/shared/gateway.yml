@@ -1,0 +1,38 @@
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 20000
+
+ribbon:
+  ReadTimeout: 20000
+  ConnectTimeout: 20000
+
+server:
+  port: 9191
+
+zuul:
+  ignoredServices: '*'
+  host:
+    connect-timeout-millis: 20000
+    socket-timeout-millis: 20000
+
+  routes:
+    base-service:
+      path: /api/base-service/**
+      url: base-service
+      stripPrefix: false
+      sensitiveHeaders:
+    image-service:
+      path: /api/image-service/**
+      url: image-service
+      stripPrefix: false
+      sensitiveHeaders:
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream
