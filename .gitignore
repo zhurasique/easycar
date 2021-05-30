@@ -10,3 +10,4 @@ exporting
 target
 *.iml
 *.mdg
+data/

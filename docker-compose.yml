@@ -1,6 +1,6 @@
 version: '3'
-services:
 
+services:
   config:
     image: config
     restart: always
@@ -15,8 +15,7 @@ services:
     image: registry
     restart: always
     depends_on:
-      config:
-        condition: service_healthy
+      - config
     logging:
       options:
         max-size: "10m"
@@ -28,8 +27,7 @@ services:
     image: monitoring
     restart: always
     depends_on:
-      config:
-        condition: service_healthy
+      - config
     logging:
       options:
         max-size: "10m"
@@ -41,8 +39,8 @@ services:
     image: gateway
     restart: always
     depends_on:
-      config:
-        condition: service_healthy
+      - registry
+      - monitoring
     logging:
       options:
         max-size: "10m"
@@ -50,12 +48,25 @@ services:
     ports:
       - "9191:9191"
 
+  mongodb:
+    image: mongo
+    restart: always
+    depends_on:
+      - gateway
+    volumes:
+      - ./data:/data/db
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+    ports:
+      - "27017:27017"
+
   base-service:
     image: base-service
     restart: always
     depends_on:
-      config:
-        condition: service_healthy
+      - mongodb
     logging:
       options:
         max-size: "10m"
@@ -67,8 +78,7 @@ services:
     image: image-service
     restart: always
     depends_on:
-      config:
-        condition: service_healthy
+      - mongodb
     logging:
       options:
         max-size: "10m"
@@ -76,17 +86,3 @@ services:
     ports:
       - "8082:8082"
 
-  mongodb:
-    image: mongo
-    restart: always
-    depends_on:
-      config:
-        condition: service_healthy
-    volumes:
-      - ./data:/data/db
-    logging:
-      options:
-        max-size: "10m"
-        max-file: "10"
-    ports:
-      - "27017:27017"
