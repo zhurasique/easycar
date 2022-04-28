@@ -2,8 +2,6 @@ package com.service.base.service;
 
 import com.service.base.entity.Drive;
 import com.service.base.repository.DriveRepo;
-import com.service.base.util.ErrorLogUtil;
-import com.service.base.util.ValidationUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,10 +20,6 @@ public class DriveService {
     }
 
     public ResponseEntity<?> save(Drive drive) {
-
-        if(!ValidationUtil.validateDrive(drive.getName(), driveRepo))
-            return new ResponseEntity<>(ErrorLogUtil.showError(120), HttpStatus.BAD_REQUEST);
-
         return new ResponseEntity<>(driveRepo.save(drive), HttpStatus.OK);
     }
 }

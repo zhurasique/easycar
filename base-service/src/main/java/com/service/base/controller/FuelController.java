@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -21,7 +22,7 @@ public class FuelController {
     }
 
     @PostMapping
-    public ResponseEntity<?> save(@RequestBody Fuel fuel) {
+    public ResponseEntity<?> save(@Valid @RequestBody Fuel fuel) {
         return fuelService.save(fuel);
     }
 }

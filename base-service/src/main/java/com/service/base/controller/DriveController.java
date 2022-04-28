@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -21,7 +22,7 @@ public class DriveController {
     }
 
     @PostMapping
-    public ResponseEntity<?> save(@RequestBody Drive drive) {
+    public ResponseEntity<?> save(@Valid @RequestBody Drive drive) {
         return driveService.save(drive);
     }
 }

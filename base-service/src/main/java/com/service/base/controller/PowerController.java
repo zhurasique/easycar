@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -21,7 +22,7 @@ public class PowerController {
     }
 
     @PostMapping
-    public ResponseEntity<?> save(@RequestBody Power power) {
+    public ResponseEntity<?> save(@Valid @RequestBody Power power) {
         return powerService.save(power);
     }
 }

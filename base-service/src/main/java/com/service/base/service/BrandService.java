@@ -3,9 +3,7 @@ package com.service.base.service;
 import com.service.base.VO.ImageVO;
 import com.service.base.entity.Brand;
 import com.service.base.repository.BrandRepo;
-import com.service.base.util.ErrorLogUtil;
 import com.service.base.util.MultipartFileUtil;
-import com.service.base.util.ValidationUtil;
 import lombok.RequiredArgsConstructor;
 import org.bson.BsonBinarySubType;
 import org.bson.types.Binary;
@@ -38,9 +36,6 @@ public class BrandService {
 
     public ResponseEntity<?> save(String name, MultipartFile multipartFile)
             throws IOException, JSONException {
-        if(!ValidationUtil.validateBrandName(name, brandRepo))
-            return new ResponseEntity<>(ErrorLogUtil.showError(103), HttpStatus.BAD_REQUEST);
-
         ImageVO imageVO = new ImageVO();
         imageVO.setId(MultipartFileUtil.postForEntity(multipartFile, restTemplate,
                 IMAGE_SERVICE_PATH + "/image").getString("id"));

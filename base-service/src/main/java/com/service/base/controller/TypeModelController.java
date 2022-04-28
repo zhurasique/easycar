@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -21,7 +22,7 @@ public class TypeModelController {
     }
 
     @PostMapping
-    public ResponseEntity<?> save(@RequestBody TypeModel typeModel) throws Exception {
+    public ResponseEntity<?> save(@Valid @RequestBody TypeModel typeModel) {
         return typeModelService.save(typeModel);
     }
 }

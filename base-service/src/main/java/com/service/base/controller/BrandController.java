@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.Valid;
 import java.io.IOException;
 import java.util.List;
 
@@ -29,8 +30,8 @@ public class BrandController {
     }
 
     @PostMapping
-    public ResponseEntity<?> save(@RequestPart(name = "name") String name,
-                                  @RequestPart(name = "image") MultipartFile image)
+    public ResponseEntity<?> save(@Valid @RequestPart(name = "name") String name,
+                                  @Valid @RequestPart(name = "image") MultipartFile image)
             throws IOException, JSONException {
         return brandService.save(name, image);
     }

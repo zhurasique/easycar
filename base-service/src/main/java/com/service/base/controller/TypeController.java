@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.Valid;
 import java.io.IOException;
 import java.util.List;
 
@@ -24,7 +25,9 @@ public class TypeController {
     }
 
     @PostMapping
-    public ResponseEntity<?> save(@RequestPart(name = "name") String name, @RequestPart(name = "image") MultipartFile image) throws IOException, JSONException {
+    public ResponseEntity<?> save(@Valid @RequestPart(name = "name") String name,
+                                  @Valid @RequestPart(name = "image") MultipartFile image)
+            throws IOException, JSONException {
         return typeService.save(name, image);
     }
 }
