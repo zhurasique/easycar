@@ -2,8 +2,6 @@ package com.service.image.service;
 
 import com.service.image.entity.Image;
 import com.service.image.repository.ImageRepo;
-import com.service.image.util.ErrorLogUtil;
-import com.service.image.util.ValidationUtil;
 import lombok.RequiredArgsConstructor;
 import org.bson.BsonBinarySubType;
 import org.bson.types.Binary;
@@ -20,17 +18,13 @@ public class ImageService {
 
     private final ImageRepo imageRepo;
 
-    public Image findById(String id) throws Exception {
-        return imageRepo.findById(id).orElseThrow(Exception::new);
+    public Image findById(String id) {
+        return imageRepo.findById(id).orElseGet(null);
     }
 
     public ResponseEntity<?> save(MultipartFile multipartFile) throws IOException {
-        if(!ValidationUtil.validateImageData(multipartFile))
-            return new ResponseEntity<>(ErrorLogUtil.showError(101), HttpStatus.BAD_REQUEST);
-
         Image image = new Image();
         image.setImage(new Binary(BsonBinarySubType.BINARY, multipartFile.getBytes()));
-
         return new ResponseEntity<>(imageRepo.save(image), HttpStatus.OK);
     }
 }

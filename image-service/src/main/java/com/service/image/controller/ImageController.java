@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.Valid;
 import java.io.IOException;
 
 @RestController
@@ -17,12 +18,12 @@ public class ImageController {
     private final ImageService imageService;
 
     @GetMapping("{id}")
-    public Image findById(@PathVariable("id") String id) throws Exception {
+    public Image findById(@PathVariable("id") String id) {
         return imageService.findById(id);
     }
 
     @PostMapping
-    public ResponseEntity<?> save(MultipartFile image) throws IOException {
+    public ResponseEntity<?> save(@Valid MultipartFile image) throws IOException {
         return imageService.save(image);
     }
 }
