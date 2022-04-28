@@ -27,7 +27,7 @@ docker build . -t registry
 cd ..
 
 if [ $1 = "prune" ]; then
-  y | docker image prune
+  docker image rm -f $(docker images -f dangling=true -q)
 fi
 
 if [ $1 = "start" ] | [ $2 = "start" ]; then

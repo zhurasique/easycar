@@ -3,8 +3,6 @@ package com.service.base.util;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -20,29 +18,20 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public abstract class MultipartFileUtil {
-    private static final Logger LOG = LoggerFactory.getLogger(MultipartFileUtil.class);
-
-    public static JSONObject postForEntity(MultipartFile multipartFile, RestTemplate restTemplate,
-                                           String endpoint) throws JSONException {
+    public static JSONObject postForEntity(MultipartFile multipartFile,
+                                           RestTemplate restTemplate,
+                                           String endpoint)
+            throws JSONException, IOException {
         MultiValueMap<String, Object> bodyMap = new LinkedMultiValueMap<>();
-
-        File file = null;
-        try {
-            file = convert(multipartFile);
-        } catch (IOException e) {
-            LOG.error(e.getMessage());
-        }
+        File file = convert(multipartFile);
         bodyMap.add("image", new FileSystemResource(file));
-
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.MULTIPART_FORM_DATA);
-
-        HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(bodyMap, headers);
-
-        ResponseEntity<String> response = restTemplate.postForEntity(endpoint, requestEntity, String.class);
-
+        HttpEntity<MultiValueMap<String, Object>> requestEntity =
+                new HttpEntity<>(bodyMap, headers);
+        ResponseEntity<String> response = restTemplate.postForEntity(endpoint,
+                requestEntity, String.class);
         file.delete();
-        
         return new JSONObject(response.getBody());
     }
 
@@ -51,8 +40,6 @@ public abstract class MultipartFileUtil {
         convFile.createNewFile();
         try (FileOutputStream fos = new FileOutputStream(convFile)) {
             fos.write(file.getBytes());
-        } catch (IOException e) {
-            LOG.error(e.getMessage());
         }
         return convFile;
     }

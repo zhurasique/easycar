@@ -23,6 +23,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BrandService {
 
+    private static final String IMAGE_SERVICE_PATH = "http://gateway/api/image-service";
+
     private final RestTemplate restTemplate;
     private final BrandRepo brandRepo;
 
@@ -34,12 +36,14 @@ public class BrandService {
         return brandRepo.findById(id).orElseThrow(Exception::new);
     }
 
-    public ResponseEntity<?> save(String name, MultipartFile multipartFile) throws IOException, JSONException {
+    public ResponseEntity<?> save(String name, MultipartFile multipartFile)
+            throws IOException, JSONException {
         if(!ValidationUtil.validateBrandName(name, brandRepo))
             return new ResponseEntity<>(ErrorLogUtil.showError(103), HttpStatus.BAD_REQUEST);
 
         ImageVO imageVO = new ImageVO();
-        imageVO.setId(MultipartFileUtil.postForEntity(multipartFile, restTemplate, "http://gateway/api/image-service/image").getString("id"));
+        imageVO.setId(MultipartFileUtil.postForEntity(multipartFile, restTemplate,
+                IMAGE_SERVICE_PATH + "/image").getString("id"));
         imageVO.setImage(new Binary(BsonBinarySubType.BINARY, multipartFile.getBytes()));
 
         Brand brand = new Brand();
