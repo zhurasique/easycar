@@ -1,6 +1,6 @@
 package com.service.base.repository;
 
-import com.service.base.model.Color;
+import com.service.base.entity.Color;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface ColorRepo extends MongoRepository<Color, String> {

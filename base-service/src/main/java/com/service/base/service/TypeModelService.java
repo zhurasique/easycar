@@ -1,11 +1,12 @@
 package com.service.base.service;
 
-import com.service.base.model.TypeModel;
+import com.service.base.entity.TypeModel;
 import com.service.base.repository.TypeModelRepo;
 import com.service.base.repository.ModelRepo;
 import com.service.base.repository.TypeRepo;
 import com.service.base.util.ErrorLogUtil;
 import com.service.base.util.ValidationUtil;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -13,17 +14,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class TypeModelService {
 
     private final TypeModelRepo typeModelRepo;
     private final TypeRepo typeRepo;
     private final ModelRepo modelRepo;
-
-    public TypeModelService(TypeModelRepo typeModelRepo, TypeRepo typeRepo, ModelRepo modelRepo) {
-        this.typeModelRepo = typeModelRepo;
-        this.typeRepo = typeRepo;
-        this.modelRepo = modelRepo;
-    }
 
     public List<TypeModel> findAll() {
         return typeModelRepo.findAll();

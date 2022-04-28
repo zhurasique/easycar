@@ -1,10 +1,11 @@
 package com.service.base.service;
 
-import com.service.base.model.Generation;
+import com.service.base.entity.Generation;
 import com.service.base.repository.GenerationRepo;
 import com.service.base.repository.ModelRepo;
 import com.service.base.util.ErrorLogUtil;
 import com.service.base.util.ValidationUtil;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -12,15 +13,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class GenerationService {
 
     private final GenerationRepo generationRepo;
     private final ModelRepo modelRepo;
-
-    public GenerationService(GenerationRepo generationRepo, ModelRepo modelRepo) {
-        this.generationRepo = generationRepo;
-        this.modelRepo = modelRepo;
-    }
 
     public List<Generation> findAll() {
         return generationRepo.findAll();

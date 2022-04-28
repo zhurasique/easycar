@@ -1,21 +1,19 @@
 package com.service.base.controller;
 
-import com.service.base.model.Equipment;
+import com.service.base.entity.Equipment;
 import com.service.base.service.EquipmentService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("api/base-service/equipment")
 public class EquipmentController {
 
     private final EquipmentService equipmentService;
-
-    public EquipmentController(EquipmentService equipmentService) {
-        this.equipmentService = equipmentService;
-    }
 
     @GetMapping
     public List<Equipment> findAll() {

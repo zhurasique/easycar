@@ -1,12 +1,9 @@
 package com.service.base.util;
 
-import com.service.base.model.Fuel;
-import com.service.base.model.Model;
-import com.service.base.model.Type;
+import com.service.base.entity.Model;
+import com.service.base.entity.Type;
 import com.service.base.repository.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.util.Optional;
 
 public abstract class ValidationUtil {
@@ -98,7 +95,7 @@ public abstract class ValidationUtil {
     }
 
     public static boolean validateColorPattern(String pattern, ColorRepo colorRepo) {
-        return !isNull(pattern) && isCorrectLength(pattern, 7, 7) && pattern.charAt(0) == '#' && isNull(colorRepo.findByPattern(pattern));
+        return !isNull(pattern) && isCorrectLength(pattern, 7, 7) && pattern.startsWith("#") && isNull(colorRepo.findByPattern(pattern));
     }
 
 

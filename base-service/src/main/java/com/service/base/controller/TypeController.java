@@ -1,7 +1,8 @@
 package com.service.base.controller;
 
-import com.service.base.model.Type;
+import com.service.base.entity.Type;
 import com.service.base.service.TypeService;
+import lombok.RequiredArgsConstructor;
 import org.json.JSONException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,14 +12,11 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("api/base-service/type")
 public class TypeController {
 
     private final TypeService typeService;
-
-    public TypeController(TypeService typeService) {
-        this.typeService = typeService;
-    }
 
     @GetMapping
     public List<Type> findAll() {

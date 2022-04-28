@@ -2,6 +2,9 @@ package com.service.base.util;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -17,28 +20,18 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public abstract class MultipartFileUtil {
+    private static final Logger LOG = LoggerFactory.getLogger(MultipartFileUtil.class);
 
-    public static File convert(MultipartFile file) {
-        File convFile = new File(file.getOriginalFilename());
-
-        try {
-            convFile.createNewFile();
-
-            FileOutputStream fos = new FileOutputStream(convFile);
-            fos.write(file.getBytes());
-            fos.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return convFile;
-    }
-
-
-    public static JSONObject postForEntity(MultipartFile multipartFile, RestTemplate restTemplate, String endpoint) throws JSONException {
+    public static JSONObject postForEntity(MultipartFile multipartFile, RestTemplate restTemplate,
+                                           String endpoint) throws JSONException {
         MultiValueMap<String, Object> bodyMap = new LinkedMultiValueMap<>();
 
-        File file = convert(multipartFile);
+        File file = null;
+        try {
+            file = convert(multipartFile);
+        } catch (IOException e) {
+            LOG.error(e.getMessage());
+        }
         bodyMap.add("image", new FileSystemResource(file));
 
         HttpHeaders headers = new HttpHeaders();
@@ -51,5 +44,16 @@ public abstract class MultipartFileUtil {
         file.delete();
         
         return new JSONObject(response.getBody());
+    }
+
+    public static File convert(MultipartFile file) throws IOException {
+        File convFile = new File(file.getOriginalFilename());
+        convFile.createNewFile();
+        try (FileOutputStream fos = new FileOutputStream(convFile)) {
+            fos.write(file.getBytes());
+        } catch (IOException e) {
+            LOG.error(e.getMessage());
+        }
+        return convFile;
     }
 }

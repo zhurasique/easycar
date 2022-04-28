@@ -1,11 +1,12 @@
 package com.service.base.service;
 
-import com.service.base.VO.Image;
-import com.service.base.model.Type;
+import com.service.base.VO.ImageVO;
+import com.service.base.entity.Type;
 import com.service.base.repository.TypeRepo;
 import com.service.base.util.ErrorLogUtil;
 import com.service.base.util.MultipartFileUtil;
 import com.service.base.util.ValidationUtil;
+import lombok.RequiredArgsConstructor;
 import org.bson.BsonBinarySubType;
 import org.bson.types.Binary;
 import org.json.JSONException;
@@ -19,16 +20,11 @@ import java.io.IOException;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class TypeService {
 
     private final RestTemplate restTemplate;
-
     private final TypeRepo typeRepo;
-
-    public TypeService(RestTemplate restTemplate, TypeRepo typeRepo) {
-        this.restTemplate = restTemplate;
-        this.typeRepo = typeRepo;
-    }
 
     public List<Type> findAll() {
         return typeRepo.findAll();
@@ -39,13 +35,13 @@ public class TypeService {
         if(!ValidationUtil.validateTypeName(name, typeRepo))
             return new ResponseEntity<>(ErrorLogUtil.showError(101), HttpStatus.BAD_REQUEST);
 
-        Image image = new Image();
-        image.setId(MultipartFileUtil.postForEntity(multipartFile, restTemplate, "http://gateway/api/image-service/image").getString("id"));
-        image.setImage(new Binary(BsonBinarySubType.BINARY, multipartFile.getBytes()));
+        ImageVO imageVO = new ImageVO();
+        imageVO.setId(MultipartFileUtil.postForEntity(multipartFile, restTemplate, "http://gateway/api/image-service/image").getString("id"));
+        imageVO.setImage(new Binary(BsonBinarySubType.BINARY, multipartFile.getBytes()));
 
         Type type = new Type();
         type.setName(name);
-        type.setImage(image);
+        type.setImageVO(imageVO);
 
         return new ResponseEntity<>(typeRepo.save(type), HttpStatus.OK);
     }

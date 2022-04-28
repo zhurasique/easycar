@@ -1,21 +1,19 @@
 package com.service.base.controller;
 
-import com.service.base.model.Drive;
+import com.service.base.entity.Drive;
 import com.service.base.service.DriveService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("api/base-service/drive")
 public class DriveController {
 
     private final DriveService driveService;
-
-    public DriveController(DriveService driveService) {
-        this.driveService = driveService;
-    }
 
     @GetMapping
     public List<Drive> findAll() {

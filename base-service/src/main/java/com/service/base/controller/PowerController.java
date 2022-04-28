@@ -1,21 +1,19 @@
 package com.service.base.controller;
 
-import com.service.base.model.Power;
+import com.service.base.entity.Power;
 import com.service.base.service.PowerService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("api/base-service/power")
 public class PowerController {
 
     private final PowerService powerService;
-
-    public PowerController(PowerService powerService) {
-        this.powerService = powerService;
-    }
 
     @GetMapping
     public List<Power> findAll() {

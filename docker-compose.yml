@@ -1,88 +1,63 @@
-version: '3'
+version: '3.9'
 
 services:
   config:
     image: config
-    restart: always
-    logging:
-      options:
-        max-size: "10m"
-        max-file: "10"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8888/actuator/health"]
+      interval: 10s
+      timeout: 5s
+      start_period: 15s
     ports:
-      - "8888:8888"
+      - 8888:8888
 
   registry:
     image: registry
-    restart: always
     depends_on:
-      - config
-    logging:
-      options:
-        max-size: "10m"
-        max-file: "10"
+      config:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8761"]
+      interval: 10s
+      timeout: 5s
+      start_period: 15s
     ports:
-      - "8761:8761"
+      - 8761:8761
 
   monitoring:
     image: monitoring
-    restart: always
     depends_on:
-      - config
-    logging:
-      options:
-        max-size: "10m"
-        max-file: "10"
+      registry:
+        condition: service_healthy
     ports:
-        - "9295:9295"
+      - 9295:9295
 
   gateway:
     image: gateway
-    restart: always
     depends_on:
-      - registry
       - monitoring
-    logging:
-      options:
-        max-size: "10m"
-        max-file: "10"
     ports:
-      - "9191:9191"
+      - 9191:9191
 
   mongodb:
     image: mongo
-    restart: always
     depends_on:
       - gateway
     volumes:
       - ./data:/data/db
-    logging:
-      options:
-        max-size: "10m"
-        max-file: "10"
     ports:
-      - "27017:27017"
+      - 27017:27017
 
   base-service:
     image: base-service
-    restart: always
     depends_on:
       - mongodb
-    logging:
-      options:
-        max-size: "10m"
-        max-file: "10"
     ports:
-      - "8081:8081"
+      - 8081:8081
 
   image-service:
     image: image-service
-    restart: always
     depends_on:
       - mongodb
-    logging:
-      options:
-        max-size: "10m"
-        max-file: "10"
     ports:
-      - "8082:8082"
-
+      - 8082:8082

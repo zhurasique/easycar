@@ -1,4 +1,4 @@
-#backend
+# IDE specific
 .local
 .project
 .classpath
@@ -10,4 +10,7 @@ exporting
 target
 *.iml
 *.mdg
-data/
+data
+
+# MacOS specific
+.DS_Store

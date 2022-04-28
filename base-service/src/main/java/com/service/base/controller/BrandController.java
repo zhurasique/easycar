@@ -1,7 +1,8 @@
 package com.service.base.controller;
 
-import com.service.base.model.Brand;
+import com.service.base.entity.Brand;
 import com.service.base.service.BrandService;
+import lombok.RequiredArgsConstructor;
 import org.json.JSONException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,14 +12,11 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("api/base-service/brand")
 public class BrandController {
 
     private final BrandService brandService;
-
-    public BrandController(BrandService brandService) {
-        this.brandService = brandService;
-    }
 
     @GetMapping
     public List<Brand> findAll() {
@@ -31,7 +29,9 @@ public class BrandController {
     }
 
     @PostMapping
-    public ResponseEntity<?> save(@RequestPart(name = "name") String name, @RequestPart(name = "image") MultipartFile image) throws IOException, JSONException {
+    public ResponseEntity<?> save(@RequestPart(name = "name") String name,
+                                  @RequestPart(name = "image") MultipartFile image)
+            throws IOException, JSONException {
         return brandService.save(name, image);
     }
 }

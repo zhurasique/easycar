@@ -1,21 +1,19 @@
 package com.service.base.controller;
 
-import com.service.base.model.Engine;
+import com.service.base.entity.Engine;
 import com.service.base.service.EngineService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("api/base-service/engine")
 public class EngineController {
 
     private final EngineService engineService;
-
-    public EngineController(EngineService engineService) {
-        this.engineService = engineService;
-    }
 
     @GetMapping
     public List<Engine> findAll() {
