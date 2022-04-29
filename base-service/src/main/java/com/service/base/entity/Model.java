@@ -8,7 +8,6 @@ import javax.validation.constraints.Size;
 
 @Data
 public class Model {
-
     @Id
     private String id;
 
