@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("api/base-service/type_model")
+@RequestMapping("api/base-service/type-model")
 public class TypeModelController {
 
     private final TypeModelService typeModelService;
