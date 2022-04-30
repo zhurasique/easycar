@@ -9,10 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.io.IOException;
@@ -37,9 +35,7 @@ public class BrandController {
 
     @PostMapping
     @ResponseStatus(value = HttpStatus.CREATED)
-    public Brand save(@Valid @RequestPart(name = "name") String name,
-                                  @Valid @RequestPart(name = "image") MultipartFile image)
-            throws IOException, JSONException {
-        return brandService.save(name, image);
+    public Brand save(@Valid Brand.Dto brand) throws IOException, JSONException {
+        return brandService.save(brand);
     }
 }

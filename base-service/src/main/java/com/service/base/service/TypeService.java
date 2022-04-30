@@ -10,7 +10,6 @@ import org.bson.types.Binary;
 import org.json.JSONException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
@@ -28,15 +27,15 @@ public class TypeService {
         return typeRepo.findAll();
     }
 
-    public Type save(String name, MultipartFile multipartFile)
+    public Type save(Type.Dto typeDto)
             throws IOException, JSONException {
         ImageVO imageVO = new ImageVO();
-        imageVO.setId(MultipartFileUtil.postForEntity(multipartFile, restTemplate,
+        imageVO.setId(MultipartFileUtil.postForEntity(typeDto.getImage(), restTemplate,
                 IMAGE_SERVICE_PATH + "/image").getString("id"));
-        imageVO.setImage(new Binary(BsonBinarySubType.BINARY, multipartFile.getBytes()));
+        imageVO.setImage(new Binary(BsonBinarySubType.BINARY, typeDto.getImage().getBytes()));
 
         Type type = new Type();
-        type.setName(name);
+        type.setName(typeDto.getName());
         type.setImageVO(imageVO);
         return typeRepo.save(type);
     }
