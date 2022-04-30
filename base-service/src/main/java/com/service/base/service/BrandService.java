@@ -8,8 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.bson.BsonBinarySubType;
 import org.bson.types.Binary;
 import org.json.JSONException;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
@@ -34,7 +32,7 @@ public class BrandService {
         return brandRepo.findById(id).orElseThrow(Exception::new);
     }
 
-    public ResponseEntity<?> save(String name, MultipartFile multipartFile)
+    public Brand save(String name, MultipartFile multipartFile)
             throws IOException, JSONException {
         ImageVO imageVO = new ImageVO();
         imageVO.setId(MultipartFileUtil.postForEntity(multipartFile, restTemplate,
@@ -44,9 +42,6 @@ public class BrandService {
         Brand brand = new Brand();
         brand.setName(name);
         brand.setImageVO(imageVO);
-
-        return new ResponseEntity<>(brandRepo.save(brand), HttpStatus.OK);
+        return brandRepo.save(brand);
     }
-
-
 }

@@ -4,12 +4,13 @@ import com.service.base.entity.Brand;
 import com.service.base.service.BrandService;
 import lombok.RequiredArgsConstructor;
 import org.json.JSONException;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -35,7 +36,8 @@ public class BrandController {
     }
 
     @PostMapping
-    public ResponseEntity<?> save(@Valid @RequestPart(name = "name") String name,
+    @ResponseStatus(value = HttpStatus.CREATED)
+    public Brand save(@Valid @RequestPart(name = "name") String name,
                                   @Valid @RequestPart(name = "image") MultipartFile image)
             throws IOException, JSONException {
         return brandService.save(name, image);

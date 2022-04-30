@@ -4,8 +4,6 @@ import com.service.base.entity.Model;
 import com.service.base.repository.BrandRepo;
 import com.service.base.repository.ModelRepo;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,8 +19,8 @@ public class ModelService {
         return modelRepo.findAll();
     }
 
-    public ResponseEntity<?> save(Model model) {
+    public Model save(Model model) {
         model.setBrand(brandRepo.findById(model.getBrand().getId()).orElse(null));
-        return new ResponseEntity<>(modelRepo.save(model), HttpStatus.OK);
+        return modelRepo.save(model);
     }
 }

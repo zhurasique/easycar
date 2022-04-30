@@ -8,8 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.bson.BsonBinarySubType;
 import org.bson.types.Binary;
 import org.json.JSONException;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
@@ -30,7 +28,7 @@ public class TypeService {
         return typeRepo.findAll();
     }
 
-    public ResponseEntity<?> save(String name, MultipartFile multipartFile)
+    public Type save(String name, MultipartFile multipartFile)
             throws IOException, JSONException {
         ImageVO imageVO = new ImageVO();
         imageVO.setId(MultipartFileUtil.postForEntity(multipartFile, restTemplate,
@@ -40,6 +38,6 @@ public class TypeService {
         Type type = new Type();
         type.setName(name);
         type.setImageVO(imageVO);
-        return new ResponseEntity<>(typeRepo.save(type), HttpStatus.OK);
+        return typeRepo.save(type);
     }
 }

@@ -3,8 +3,6 @@ package com.service.base.service;
 import com.service.base.entity.Engine;
 import com.service.base.repository.EngineRepo;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,7 +17,7 @@ public class EngineService {
         return engineRepo.findAll();
     }
 
-    public ResponseEntity<?> save(Engine engine) {
-        return new ResponseEntity<>(engineRepo.save(engine), HttpStatus.OK);
+    public Engine save(Engine engine) {
+        return engineRepo.save(engine);
     }
 }
