@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,6 +28,7 @@ public class RestExceptionHandler {
         });
         return Response.builder()
                 .message(errors.toString())
+                .dateTime(LocalDateTime.now())
                 .build();
     }
 
@@ -35,6 +37,7 @@ public class RestExceptionHandler {
     public Response handleIoException(IOException ex) {
         return Response.builder()
                 .message(ex.getMessage())
+                .dateTime(LocalDateTime.now())
                 .build();
     }
 
@@ -43,6 +46,7 @@ public class RestExceptionHandler {
     public Response handleException(Exception ex) {
         return Response.builder()
                 .message(ex.getMessage())
+                .dateTime(LocalDateTime.now())
                 .build();
     }
 
@@ -50,5 +54,6 @@ public class RestExceptionHandler {
     @Builder
     private static class Response {
         private String message;
+        private LocalDateTime dateTime;
     }
 }
