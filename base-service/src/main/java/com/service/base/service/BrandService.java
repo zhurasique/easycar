@@ -27,8 +27,8 @@ public class BrandService {
         return brandRepo.findAll();
     }
 
-    public Brand findById(String id) throws Exception {
-        return brandRepo.findById(id).orElseThrow(Exception::new);
+    public Brand findById(String id) {
+        return brandRepo.findById(id).orElseThrow(null);
     }
 
     public Brand save(Brand.Dto brandDto)

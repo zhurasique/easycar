@@ -2,7 +2,6 @@ package com.service.base.entity;
 
 import com.service.base.VO.ImageVO;
 import lombok.Data;
-import org.bson.types.Binary;
 import org.springframework.data.annotation.Id;
 import org.springframework.web.multipart.MultipartFile;
 

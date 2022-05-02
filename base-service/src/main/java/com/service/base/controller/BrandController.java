@@ -29,7 +29,7 @@ public class BrandController {
     }
 
     @GetMapping("{id}")
-    public Brand findById(@PathVariable("id") String id) throws Exception {
+    public Brand findById(@PathVariable("id") String id) {
         return brandService.findById(id);
     }
 

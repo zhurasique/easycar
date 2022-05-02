@@ -17,6 +17,10 @@ public class ColorService {
         return colorRepo.findAll();
     }
 
+    public Color findById(String id) {
+        return colorRepo.findById(id).orElseThrow(null);
+    }
+
     public Color save(Color color) {
         return colorRepo.save(color);
     }
