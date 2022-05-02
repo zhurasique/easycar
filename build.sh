@@ -2,29 +2,18 @@
 
 mvn clean install
 
-cd base-service
-docker build . -t base-service
-cd ..
+build_image() {
+  cd $1
+  docker build . -t $1
+  cd ..
+}
 
-cd config
-docker build . -t config
-cd ..
-
-cd gateway
-docker build . -t gateway
-cd ..
-
-cd image-service
-docker build . -t image-service
-cd ..
-
-cd monitoring
-docker build . -t monitoring
-cd ..
-
-cd registry
-docker build . -t registry
-cd ..
+build_image config
+build_image gateway
+build_image base-service
+build_image image-service
+build_image monitoring
+build_image registry
 
 if [ $1 = "prune" ]; then
   docker image rm -f $(docker images -f dangling=true -q)

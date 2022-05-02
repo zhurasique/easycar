@@ -35,7 +35,7 @@ public abstract class MultipartFileUtil {
         return new JSONObject(response.getBody());
     }
 
-    public static File convert(MultipartFile file) throws IOException {
+    private static File convert(MultipartFile file) throws IOException {
         File convFile = new File(file.getOriginalFilename());
         convFile.createNewFile();
         try (FileOutputStream fos = new FileOutputStream(convFile)) {
