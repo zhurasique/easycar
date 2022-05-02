@@ -1,7 +1,6 @@
 package com.service.image.advice;
 
 import lombok.Builder;
-import lombok.Data;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -50,7 +49,6 @@ public class RestExceptionHandler {
                 .build();
     }
 
-    @Data
     @Builder
     private static class Response {
         private String message;

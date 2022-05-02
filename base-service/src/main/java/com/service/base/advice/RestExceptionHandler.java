@@ -1,7 +1,6 @@
 package com.service.base.advice;
 
 import lombok.Builder;
-import lombok.Data;
 import org.json.JSONException;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
@@ -60,7 +59,6 @@ public class RestExceptionHandler {
                 .build();
     }
 
-    @Data
     @Builder
     private static class Response {
         private String message;
