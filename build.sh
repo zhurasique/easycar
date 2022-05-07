@@ -1,6 +1,11 @@
 #!/bin/bash
+set -e
 
-mvn clean install
+if [[ $2 == "skip-tests" ]] | [[ $3 == "skip-tests" ]]; then
+  mvn clean install -Dmaven.test.skip=true
+else
+  mvn clean install
+fi
 
 build_image() {
   cd $1
@@ -15,10 +20,10 @@ build_image image-service
 build_image monitoring
 build_image registry
 
-if [ $1 = "prune" ]; then
+if [[ $1 == "prune" ]]; then
   docker image rm -f $(docker images -f dangling=true -q)
 fi
 
-if [ $1 = "start" ] | [ $2 = "start" ]; then
+if [[ $1 == "start" ]] | [[ $2 == "start" ]]; then
   docker-compose up -d
 fi

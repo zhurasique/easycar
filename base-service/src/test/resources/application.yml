@@ -1,0 +1,5 @@
+spring:
+  data:
+    mongodb:
+      database: easycar
+      port: 0
