@@ -32,8 +32,7 @@ public class BrandService {
         return brandRepo.findById(id).orElseThrow(() -> new NoSuchElementFoundException(id));
     }
 
-    public Brand save(Brand.Dto brandDto)
-            throws IOException, JSONException {
+    public Brand save(Brand.Dto brandDto) throws IOException, JSONException {
         ImageVO imageVO = new ImageVO();
         imageVO.setId(MultipartFileUtil.postForEntity(brandDto.getImage(), restTemplate,
                 IMAGE_SERVICE_PATH + "/image").getString("id"));

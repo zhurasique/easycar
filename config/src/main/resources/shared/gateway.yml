@@ -30,6 +30,11 @@ zuul:
       url: image-service
       stripPrefix: false
       sensitiveHeaders:
+    advert-service:
+      path: /api/advert-service/**
+      url: advert-service
+      stripPrefix: false
+      sensetiveHeaders:
 
 management:
   endpoints:

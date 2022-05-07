@@ -4,10 +4,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.service</groupId>
-    <artifactId>base-service</artifactId>
+    <artifactId>advert-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
-    <name>base-service</name>
+    <name>advert-service</name>
 
     <parent>
         <artifactId>easy-car</artifactId>
@@ -47,13 +47,6 @@
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.vaadin.external.google</groupId>
-            <artifactId>android-json</artifactId>
-            <version>0.0.20131108.vaadin1</version>
-            <scope>compile</scope>
         </dependency>
 
         <dependency>

@@ -17,6 +17,7 @@ build_image config
 build_image gateway
 build_image base-service
 build_image image-service
+build_image advert-service
 build_image monitoring
 build_image registry
 

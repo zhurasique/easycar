@@ -61,3 +61,10 @@ services:
       - mongodb
     ports:
       - 8082:8082
+
+  advert-service:
+    image: advert-service
+    depends_on:
+      - mongodb
+    ports:
+      - 8083:8083
