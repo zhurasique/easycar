@@ -2,6 +2,7 @@ package com.service.base.service;
 
 import com.service.base.VO.ImageVO;
 import com.service.base.entity.Brand;
+import com.service.base.exception.NoSuchElementFoundException;
 import com.service.base.repository.BrandRepo;
 import com.service.base.util.MultipartFileUtil;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +29,7 @@ public class BrandService {
     }
 
     public Brand findById(String id) {
-        return brandRepo.findById(id).orElseThrow(null);
+        return brandRepo.findById(id).orElseThrow(() -> new NoSuchElementFoundException(id));
     }
 
     public Brand save(Brand.Dto brandDto)

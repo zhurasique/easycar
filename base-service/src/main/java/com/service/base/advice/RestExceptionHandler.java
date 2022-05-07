@@ -1,6 +1,8 @@
 package com.service.base.advice;
 
+import com.service.base.exception.NoSuchElementFoundException;
 import lombok.Builder;
+import lombok.Data;
 import org.json.JSONException;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
@@ -59,7 +61,17 @@ public class RestExceptionHandler {
                 .build();
     }
 
+    @ExceptionHandler(NoSuchElementFoundException.class)
+    @ResponseStatus(value = HttpStatus.NOT_FOUND)
+    public Response handleNoSuchElementFoundException(NoSuchElementFoundException ex) {
+        return Response.builder()
+                .message(ex.getMessage())
+                .dateTime(LocalDateTime.now())
+                .build();
+    }
+
     @Builder
+    @Data
     private static class Response {
         private String message;
         private LocalDateTime dateTime;

@@ -1,6 +1,7 @@
 package com.service.base.service;
 
 import com.service.base.entity.Color;
+import com.service.base.exception.NoSuchElementFoundException;
 import com.service.base.repository.ColorRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,7 @@ public class ColorService {
     }
 
     public Color findById(String id) {
-        return colorRepo.findById(id).orElseThrow(null);
+        return colorRepo.findById(id).orElseThrow(() -> new NoSuchElementFoundException(id));
     }
 
     public Color save(Color color) {

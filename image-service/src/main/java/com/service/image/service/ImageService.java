@@ -1,6 +1,7 @@
 package com.service.image.service;
 
 import com.service.image.entity.Image;
+import com.service.image.exception.NoSuchElementFoundException;
 import com.service.image.repository.ImageRepo;
 import lombok.RequiredArgsConstructor;
 import org.bson.BsonBinarySubType;
@@ -17,7 +18,7 @@ public class ImageService {
     private final ImageRepo imageRepo;
 
     public Image findById(String id) {
-        return imageRepo.findById(id).orElseGet(null);
+        return imageRepo.findById(id).orElseThrow(() -> new NoSuchElementFoundException(id));
     }
 
     public Image save(MultipartFile multipartFile) throws IOException {
