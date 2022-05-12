@@ -1,6 +1,6 @@
 package com.service.base.service;
 
-import com.service.base.VO.ImageVO;
+import com.service.base.vo.ImageVo;
 import com.service.base.entity.Brand;
 import com.service.base.exception.NoSuchElementFoundException;
 import com.service.base.repository.BrandRepo;
@@ -33,14 +33,14 @@ public class BrandService {
     }
 
     public Brand save(Brand.Dto brandDto) throws IOException, JSONException {
-        ImageVO imageVO = new ImageVO();
-        imageVO.setId(MultipartFileUtil.postForEntity(brandDto.getImage(), restTemplate,
+        ImageVo image = new ImageVo();
+        image.setId(MultipartFileUtil.postForEntity(brandDto.getImage(), restTemplate,
                 IMAGE_SERVICE_PATH + "/image").getString("id"));
-        imageVO.setImage(new Binary(BsonBinarySubType.BINARY, brandDto.getImage().getBytes()));
+        image.setImage(new Binary(BsonBinarySubType.BINARY, brandDto.getImage().getBytes()));
 
         Brand brand = new Brand();
         brand.setName(brandDto.getName());
-        brand.setImageVO(imageVO);
+        brand.setImage(image);
         return brandRepo.save(brand);
     }
 }

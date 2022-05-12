@@ -1,6 +1,6 @@
 package com.service.base.entity;
 
-import com.service.base.VO.ImageVO;
+import com.service.base.vo.ImageVo;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.web.multipart.MultipartFile;
@@ -13,7 +13,7 @@ public class Brand {
     @Id
     private String id;
     private String name;
-    private ImageVO imageVO;
+    private ImageVo image;
 
     @Data
     public static class Dto {

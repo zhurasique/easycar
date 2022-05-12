@@ -1,6 +1,6 @@
 package com.service.base.service;
 
-import com.service.base.VO.ImageVO;
+import com.service.base.vo.ImageVo;
 import com.service.base.entity.Type;
 import com.service.base.repository.TypeRepo;
 import com.service.base.util.MultipartFileUtil;
@@ -29,14 +29,14 @@ public class TypeService {
 
     public Type save(Type.Dto typeDto)
             throws IOException, JSONException {
-        ImageVO imageVO = new ImageVO();
-        imageVO.setId(MultipartFileUtil.postForEntity(typeDto.getImage(), restTemplate,
+        ImageVo image = new ImageVo();
+        image.setId(MultipartFileUtil.postForEntity(typeDto.getImage(), restTemplate,
                 IMAGE_SERVICE_PATH + "/image").getString("id"));
-        imageVO.setImage(new Binary(BsonBinarySubType.BINARY, typeDto.getImage().getBytes()));
+        image.setImage(new Binary(BsonBinarySubType.BINARY, typeDto.getImage().getBytes()));
 
         Type type = new Type();
         type.setName(typeDto.getName());
-        type.setImageVO(imageVO);
+        type.setImage(image);
         return typeRepo.save(type);
     }
 }

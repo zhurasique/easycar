@@ -1,10 +1,10 @@
-package com.service.base.VO;
+package com.service.base.vo;
 
 import lombok.Data;
 import org.bson.types.Binary;
 
 @Data
-public class ImageVO {
+public class ImageVo {
     private String id;
     private Binary image;
 }
