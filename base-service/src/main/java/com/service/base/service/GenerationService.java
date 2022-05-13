@@ -1,6 +1,7 @@
 package com.service.base.service;
 
 import com.service.base.entity.Generation;
+import com.service.base.exception.NoSuchElementFoundException;
 import com.service.base.repository.GenerationRepo;
 import com.service.base.repository.ModelRepo;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +21,8 @@ public class GenerationService {
     }
 
     public Generation save(Generation generation) {
-        generation.setModel(modelRepo.findById(generation.getModel().getId()).orElse(null));
+        String modelId = generation.getModel().getId();
+        generation.setModel(modelRepo.findById(modelId).orElseThrow(() -> new NoSuchElementFoundException(modelId)));
         return generationRepo.save(generation);
     }
 }

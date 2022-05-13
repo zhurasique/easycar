@@ -1,11 +1,9 @@
 package com.service.base.service;
 
 import com.service.base.client.ImageServiceClient;
-import com.service.base.vo.Image;
 import com.service.base.entity.Type;
 import com.service.base.repository.TypeRepo;
 import lombok.RequiredArgsConstructor;
-import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -23,11 +21,9 @@ public class TypeService {
     }
 
     public Type save(Type.Dto typeDto) throws IOException {
-//        Image image = imageServiceClient.save(typeDto.getImage());
-
-        Type type = new Type();
-        type.setName(typeDto.getName());
-//        type.setImage(image);
-        return typeRepo.save(type);
+        return typeRepo.save(Type.builder()
+                .name(typeDto.getName())
+                .image(imageServiceClient.save(typeDto.getImage().getBytes()))
+                .build());
     }
 }

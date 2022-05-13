@@ -1,6 +1,7 @@
 package com.service.base.service;
 
 import com.service.base.entity.TypeModel;
+import com.service.base.exception.NoSuchElementFoundException;
 import com.service.base.repository.TypeModelRepo;
 import com.service.base.repository.ModelRepo;
 import com.service.base.repository.TypeRepo;
@@ -22,8 +23,10 @@ public class TypeModelService {
     }
 
     public TypeModel save(TypeModel typeModel) {
-        typeModel.setModel(modelRepo.findById(typeModel.getModel().getId()).orElse(null));
-        typeModel.setType(typeRepo.findById(typeModel.getType().getId()).orElse(null));
+        String modelId = typeModel.getModel().getId();
+        typeModel.setModel(modelRepo.findById(modelId).orElseThrow(() -> new NoSuchElementFoundException(modelId)));
+        String typeId = typeModel.getType().getId();
+        typeModel.setType(typeRepo.findById(typeId).orElseThrow(() -> new NoSuchElementFoundException(typeId)));
         return typeModelRepo.save(typeModel);
     }
 }

@@ -1,7 +1,6 @@
 package com.service.base.service;
 
 import com.service.base.client.ImageServiceClient;
-import com.service.base.vo.Image;
 import com.service.base.entity.Brand;
 import com.service.base.exception.NoSuchElementFoundException;
 import com.service.base.repository.BrandRepo;
@@ -27,11 +26,9 @@ public class BrandService {
     }
 
     public Brand save(Brand.Dto brandDto) throws IOException {
-        Image image = imageServiceClient.save(brandDto.getImage().getBytes());
-
-        Brand brand = new Brand();
-        brand.setName(brandDto.getName());
-        brand.setImage(image);
-        return brandRepo.save(brand);
+        return brandRepo.save(Brand.builder()
+                .name(brandDto.getName())
+                .image(imageServiceClient.save(brandDto.getImage().getBytes()))
+                .build());
     }
 }
