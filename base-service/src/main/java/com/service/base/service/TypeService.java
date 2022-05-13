@@ -1,15 +1,12 @@
 package com.service.base.service;
 
-import com.service.base.vo.ImageVo;
+import com.service.base.client.ImageServiceClient;
+import com.service.base.vo.Image;
 import com.service.base.entity.Type;
 import com.service.base.repository.TypeRepo;
-import com.service.base.util.MultipartFileUtil;
 import lombok.RequiredArgsConstructor;
-import org.bson.BsonBinarySubType;
-import org.bson.types.Binary;
-import org.json.JSONException;
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.util.List;
@@ -18,25 +15,19 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TypeService {
 
-    private static final String IMAGE_SERVICE_PATH = "http://gateway/api/image-service";
-
-    private final RestTemplate restTemplate;
+    private final ImageServiceClient imageServiceClient;
     private final TypeRepo typeRepo;
 
     public List<Type> findAll() {
         return typeRepo.findAll();
     }
 
-    public Type save(Type.Dto typeDto)
-            throws IOException, JSONException {
-        ImageVo image = new ImageVo();
-        image.setId(MultipartFileUtil.postForEntity(typeDto.getImage(), restTemplate,
-                IMAGE_SERVICE_PATH + "/image").getString("id"));
-        image.setImage(new Binary(BsonBinarySubType.BINARY, typeDto.getImage().getBytes()));
+    public Type save(Type.Dto typeDto) throws IOException {
+//        Image image = imageServiceClient.save(typeDto.getImage());
 
         Type type = new Type();
         type.setName(typeDto.getName());
-        type.setImage(image);
+//        type.setImage(image);
         return typeRepo.save(type);
     }
 }

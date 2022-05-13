@@ -1,10 +1,9 @@
 package com.service.base.vo;
 
 import lombok.Data;
-import org.bson.types.Binary;
 
 @Data
-public class ImageVo {
+public class Image {
     private String id;
-    private Binary image;
+    private byte[] base64Image;
 }

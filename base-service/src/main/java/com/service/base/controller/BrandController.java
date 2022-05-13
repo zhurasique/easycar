@@ -3,7 +3,6 @@ package com.service.base.controller;
 import com.service.base.entity.Brand;
 import com.service.base.service.BrandService;
 import lombok.RequiredArgsConstructor;
-import org.json.JSONException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,7 +34,7 @@ public class BrandController {
 
     @PostMapping
     @ResponseStatus(value = HttpStatus.CREATED)
-    public Brand save(@Valid Brand.Dto brand) throws IOException, JSONException {
+    public Brand save(@Valid Brand.Dto brand) throws IOException {
         return brandService.save(brand);
     }
 }

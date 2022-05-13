@@ -3,7 +3,6 @@ package com.service.base.advice;
 import com.service.base.exception.NoSuchElementFoundException;
 import lombok.Builder;
 import lombok.Data;
-import org.json.JSONException;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -43,15 +42,6 @@ public class RestExceptionHandler {
                 .build();
     }
 
-    @ExceptionHandler(JSONException.class)
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
-    public Response handleJsonException(JSONException ex) {
-        return Response.builder()
-                .message(ex.getMessage())
-                .dateTime(LocalDateTime.now())
-                .build();
-    }
-
     @ExceptionHandler(Exception.class)
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     public Response handleException(Exception ex) {
@@ -60,6 +50,16 @@ public class RestExceptionHandler {
                 .dateTime(LocalDateTime.now())
                 .build();
     }
+
+    @ExceptionHandler(NullPointerException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public Response handleNullPointerException(NullPointerException ex) {
+        return Response.builder()
+                .message(ex.getMessage())
+                .dateTime(LocalDateTime.now())
+                .build();
+    }
+
 
     @ExceptionHandler(NoSuchElementFoundException.class)
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
