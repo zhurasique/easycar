@@ -6,6 +6,7 @@ import com.service.base.exception.NoSuchElementFoundException;
 import com.service.base.repository.BrandRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.util.List;
@@ -25,6 +26,7 @@ public class BrandService {
         return brandRepo.findById(id).orElseThrow(() -> new NoSuchElementFoundException(id));
     }
 
+    @Transactional
     public Brand save(Brand.Dto brandDto) throws IOException {
         return brandRepo.save(Brand.builder()
                 .name(brandDto.getName())

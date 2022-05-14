@@ -6,6 +6,7 @@ import com.service.base.exception.NoSuchElementFoundException;
 import com.service.base.repository.TypeRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.util.List;
@@ -25,6 +26,7 @@ public class TypeService {
         return typeRepo.findById(id).orElseThrow(() -> new NoSuchElementFoundException(id));
     }
 
+    @Transactional
     public Type save(Type.Dto typeDto) throws IOException {
         return typeRepo.save(Type.builder()
                 .name(typeDto.getName())
