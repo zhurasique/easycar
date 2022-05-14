@@ -6,13 +6,13 @@ import org.springframework.data.annotation.Id;
 import javax.validation.constraints.NotNull;
 
 @Data
-public class TypeModel {
+public class CarEquipment {
     @Id
     private String id;
 
     @NotNull
-    private Model model;
+    private Car car;
 
     @NotNull
-    private Type type;
+    private Equipment equipment;
 }

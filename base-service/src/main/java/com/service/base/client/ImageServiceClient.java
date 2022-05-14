@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @FeignClient(name = "image-service")
-@RequestMapping("/api/image-service/image")
+@RequestMapping("/api/image-service")
 public interface ImageServiceClient {
-    @PostMapping("/base64")
+    @PostMapping("/image/base64")
     Image save(byte[] imageBytes);
 }
