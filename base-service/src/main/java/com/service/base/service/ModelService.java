@@ -14,15 +14,18 @@ import java.util.List;
 public class ModelService {
 
     private final ModelRepo modelRepo;
-    private final BrandRepo brandRepo;
+    private final BrandService brandService;
 
     public List<Model> findAll(){
         return modelRepo.findAll();
     }
 
+    public Model findById(String id) {
+        return modelRepo.findById(id).orElseThrow(() -> new NoSuchElementFoundException(id));
+    }
+
     public Model save(Model model) {
-        String brandId = model.getBrand().getId();
-        model.setBrand(brandRepo.findById(brandId).orElseThrow(() -> new NoSuchElementFoundException(brandId)));
+        model.setBrand(brandService.findById(model.getBrand().getId()));
         return modelRepo.save(model);
     }
 }

@@ -2,6 +2,7 @@ package com.service.base.service;
 
 import com.service.base.client.ImageServiceClient;
 import com.service.base.entity.Type;
+import com.service.base.exception.NoSuchElementFoundException;
 import com.service.base.repository.TypeRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,10 @@ public class TypeService {
 
     public List<Type> findAll() {
         return typeRepo.findAll();
+    }
+
+    public Type findById(String id) {
+        return typeRepo.findById(id).orElseThrow(() -> new NoSuchElementFoundException(id));
     }
 
     public Type save(Type.Dto typeDto) throws IOException {
