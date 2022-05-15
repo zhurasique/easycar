@@ -1,4 +1,7 @@
 package com.service.location.repository;
 
-public interface RegionRepo {
+import com.service.location.entity.Region;
+import org.springframework.data.mongodb.repository.MongoRepository;
+
+public interface RegionRepo extends MongoRepository<Region, String> {
 }
