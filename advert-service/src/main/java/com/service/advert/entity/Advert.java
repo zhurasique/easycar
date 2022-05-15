@@ -1,7 +1,6 @@
 package com.service.advert.entity;
 
 import com.service.advert.vo.Car;
-import com.service.advert.vo.City;
 import com.service.advert.vo.Location;
 import com.service.advert.vo.User;
 import lombok.Data;

@@ -1,6 +1,5 @@
 package com.service.base.repository;
 
-import com.service.base.entity.Car;
 import com.service.base.entity.CarEquipment;
 import org.springframework.data.mongodb.repository.MongoRepository;
 

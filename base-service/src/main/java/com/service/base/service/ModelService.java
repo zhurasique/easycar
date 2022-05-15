@@ -2,7 +2,6 @@ package com.service.base.service;
 
 import com.service.base.entity.Model;
 import com.service.base.exception.NoSuchElementFoundException;
-import com.service.base.repository.BrandRepo;
 import com.service.base.repository.ModelRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
