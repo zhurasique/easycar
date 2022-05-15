@@ -43,7 +43,8 @@
         <module>gateway</module>
         <module>base-service</module>
         <module>image-service</module>
-        <module>advert-service</module>
         <module>location-service</module>
+        <module>user-service</module>
+        <module>advert-service</module>
     </modules>
 </project>

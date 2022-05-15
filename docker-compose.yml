@@ -69,6 +69,13 @@ services:
     ports:
       - 8083:8083
 
+  user-service:
+    image: user-service
+    depends_on:
+      - mongodb
+    ports:
+      - 8084:8084
+
   advert-service:
     image: advert-service
     depends_on:

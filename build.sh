@@ -15,12 +15,13 @@ build_image() {
 
 build_image config
 build_image gateway
+build_image monitoring
+build_image registry
 build_image base-service
 build_image image-service
 build_image location-service
+build_image user-service
 build_image advert-service
-build_image monitoring
-build_image registry
 
 if [[ $1 == "prune" ]]; then
   docker image rm -f $(docker images -f dangling=true -q)
