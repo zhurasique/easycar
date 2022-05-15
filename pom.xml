@@ -44,5 +44,6 @@
         <module>base-service</module>
         <module>image-service</module>
         <module>advert-service</module>
+        <module>location-service</module>
     </modules>
 </project>
