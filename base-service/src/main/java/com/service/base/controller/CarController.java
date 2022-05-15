@@ -29,7 +29,7 @@ public class CarController {
     }
 
     @PutMapping("{id}")
-    public Car update(@PathVariable String id, Car newData) {
+    public Car update(@PathVariable String id, @Valid @RequestBody Car newData) {
         return carService.update(id, newData);
     }
 

@@ -20,5 +20,5 @@ public interface LocationServiceClient {
     void deleteLocation(@PathVariable String id);
 
     @PutMapping("/location/{id}")
-    Location updateLocation(@PathVariable String id, Location newData);
+    Location updateLocation(@PathVariable String id, @RequestBody Location newData);
 }

@@ -61,7 +61,6 @@ public class RestExceptionHandler {
                 .build();
     }
 
-
     @ExceptionHandler(NoSuchElementFoundException.class)
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
     public Response handleNoSuchElementFoundException(NoSuchElementFoundException ex) {

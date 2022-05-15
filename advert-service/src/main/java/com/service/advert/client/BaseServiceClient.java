@@ -20,7 +20,7 @@ public interface BaseServiceClient {
     void deleteCar(@PathVariable String id);
 
     @PutMapping("/car/{id}")
-    Car updateCar(@PathVariable String id, Car newData);
+    Car updateCar(@PathVariable String id, @RequestBody Car newData);
 
     @PostMapping("/car")
     Car saveCar(@RequestBody Car car);

@@ -62,6 +62,7 @@ public class AdvertService {
     @Transactional
     public Advert save(Advert advert) {
         advert.setPostDateTime(LocalDateTime.now());
+        advert.setActive(true);
         advert.setCar(baseServiceClient.saveCar(advert.getCar()));
         advert.setLocation(locationServiceClient.saveLocation(advert.getLocation()));
         advert.setUser(userServiceClient.findById(advert.getUser().getId()));
