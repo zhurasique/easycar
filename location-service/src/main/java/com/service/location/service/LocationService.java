@@ -23,6 +23,17 @@ public class LocationService {
         return locationRepo.findById(id).orElseThrow(() -> new NoSuchElementFoundException(id));
     }
 
+    public Location update(String id, Location newData) {
+        Location oldData = findById(id);
+        oldData.setStreetName(newData.getStreetName());
+        oldData.setCity(cityService.findById(newData.getCity().getId()));
+        return oldData;
+    }
+
+    public void delete(String id) {
+        locationRepo.delete(findById(id));
+    }
+
     public Location save(Location location) {
         location.setCity(cityService.findById(location.getCity().getId()));
         return locationRepo.save(location);

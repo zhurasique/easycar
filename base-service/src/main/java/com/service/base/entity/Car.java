@@ -49,7 +49,7 @@ public class Car {
     private long odometer;
 
     @Size(min = 17, max = 17)
-    private String vin;
+    private String vin;         // cannot be changed in future
 
     private enum Fuel {
         DIESEL, GAS, LPG, GAS_LPG, ELECTRIC

@@ -9,6 +9,7 @@ import org.springframework.data.annotation.Id;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 
 @Data
 public class Advert {
@@ -24,6 +25,11 @@ public class Advert {
     @DecimalMin("30")
     @DecimalMax("999999999")
     private int price;
+
+    @NotNull
+    private boolean isActive;
+
+    private LocalDateTime postDateTime;
 
     @NotNull
     private Currency currency;
