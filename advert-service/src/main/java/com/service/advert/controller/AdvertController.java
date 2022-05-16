@@ -35,13 +35,13 @@ public class AdvertController {
         return advertService.findAll();
     }
 
-    @GetMapping
+    @GetMapping("/paging")
     public Page<Advert> findAllPaging(@RequestParam int page,
                                       @RequestParam int size) {
         return advertService.findAllPaging(size, page);
     }
 
-    @GetMapping
+    @GetMapping("/sort")
     public List<Advert> findAllSorted(@RequestParam Sort.Direction direction,
                                       @RequestParam String property) {
         return advertService.findAllSorted(direction, property);
