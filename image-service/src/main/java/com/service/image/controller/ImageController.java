@@ -4,6 +4,7 @@ import com.service.image.entity.Image;
 import com.service.image.service.ImageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,6 +33,11 @@ public class ImageController {
     @GetMapping("{id}")
     public Image findById(@PathVariable("id") String id) {
         return imageService.findById(id);
+    }
+
+    @DeleteMapping("{id}")
+    public void delete(@PathVariable String id) {
+        imageService.delete(id);
     }
 
     @PostMapping("/base64")

@@ -11,7 +11,6 @@ public class AdvertImage {
     @Id
     private String id;
 
-    @NotNull
     private boolean isMain;
 
     @NotNull

@@ -24,6 +24,10 @@ public class ImageService {
         return imageRepo.findById(id).orElseThrow(() -> new NoSuchElementFoundException(id));
     }
 
+    public void delete(String id) {
+        imageRepo.delete(findById(id));
+    }
+
     public Image save(byte[] imageBytes) {
         Image img = new Image();
         img.setBase64Image(imageBytes);
