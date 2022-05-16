@@ -1,8 +1,10 @@
 package com.service.advert.controller;
 
 import com.service.advert.entity.Exchange;
+import com.service.advert.entity.validation.SurchargeConstraint;
 import com.service.advert.service.ExchangeService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -17,6 +19,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@Validated
 @RequestMapping("api/advert-service/exchange")
 public class ExchangeController {
 
@@ -33,7 +36,8 @@ public class ExchangeController {
     }
 
     @PatchMapping("{id}")
-    public Exchange update(@PathVariable String id, @Valid @RequestBody Exchange.Surcharge surcharge) {
+    public Exchange update(@PathVariable String id,
+                           @SurchargeConstraint @RequestBody Exchange.Surcharge surcharge) {
         return exchangeService.update(id, surcharge);
     }
 

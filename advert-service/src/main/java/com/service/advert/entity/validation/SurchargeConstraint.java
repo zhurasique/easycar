@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
 
 @Documented
 @Constraint(validatedBy = SurchargeValidator.class)
-@Target( { ElementType.METHOD, ElementType.FIELD })
+@Target({ElementType.PARAMETER, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface SurchargeConstraint {
     String message() default "Invalid surcharge information";
