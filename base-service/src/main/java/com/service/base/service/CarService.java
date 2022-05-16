@@ -26,11 +26,7 @@ public class CarService {
         oldData.setGeneration(generationService.findById(newData.getGeneration().getId()));
         oldData.setColor(colorService.findById(newData.getColor().getId()));
         oldData.setType(typeService.findById(newData.getType().getId()));
-        Generation generation = newData.getGeneration();
-        int yearOfProduction = newData.getYerOfProduction();
-        if (yearOfProduction < generation.getYearFrom() || yearOfProduction > generation.getYearTo()) {
-            throw new BusinessLogicException("Year of production must be in scope of generation years");
-        }
+        validateProductionYear(newData);
         oldData.setFuel(newData.getFuel());
         oldData.setDrive(newData.getDrive());
         oldData.setTransmission(newData.getTransmission());
@@ -49,11 +45,15 @@ public class CarService {
         car.setGeneration(generationService.findById(car.getGeneration().getId()));
         car.setColor(colorService.findById(car.getColor().getId()));
         car.setType(typeService.findById(car.getType().getId()));
+        validateProductionYear(car);
+        return carRepo.save(car);
+    }
+
+    private void validateProductionYear(Car car) {
         Generation generation = car.getGeneration();
         int yerOfProduction = car.getYerOfProduction();
         if (yerOfProduction < generation.getYearFrom() || yerOfProduction > generation.getYearTo()) {
             throw new BusinessLogicException("Year of production must be in scope of generation years");
         }
-        return carRepo.save(car);
     }
 }
