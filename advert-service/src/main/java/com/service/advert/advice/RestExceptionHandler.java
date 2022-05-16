@@ -1,5 +1,6 @@
 package com.service.advert.advice;
 
+import com.service.advert.exception.BusinessLogicException;
 import com.service.advert.exception.NoSuchElementFoundException;
 import lombok.Builder;
 import lombok.Data;
@@ -54,6 +55,15 @@ public class RestExceptionHandler {
     @ExceptionHandler(NoSuchElementFoundException.class)
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
     public Response handleNoSuchElementFoundException(NoSuchElementFoundException ex) {
+        return Response.builder()
+                .message(ex.getMessage())
+                .dateTime(LocalDateTime.now())
+                .build();
+    }
+
+    @ExceptionHandler(BusinessLogicException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public Response handleBusinessLogicException(BusinessLogicException ex) {
         return Response.builder()
                 .message(ex.getMessage())
                 .dateTime(LocalDateTime.now())
