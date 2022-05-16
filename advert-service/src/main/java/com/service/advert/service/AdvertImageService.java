@@ -31,7 +31,7 @@ public class AdvertImageService {
 
     public AdvertImage setMain(String imageId, String advertId) {
         AdvertImage advertImage = findByAdvertId(advertId).stream()
-                .filter(x -> x.getImage().getId().equals(imageId))
+                .filter(x -> x.getId().equals(imageId))
                 .findAny()
                 .orElseThrow(() -> new NoSuchElementFoundException(imageId));
         advertImage.setMain(true);
