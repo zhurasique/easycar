@@ -7,6 +7,9 @@ import com.service.advert.entity.Advert;
 import com.service.advert.exception.NoSuchElementFoundException;
 import com.service.advert.repository.AdvertRepo;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +27,14 @@ public class AdvertService {
 
     public List<Advert> findAll() {
         return advertRepo.findAll();
+    }
+
+    public Page<Advert> findAllPaging(int page, int size) {
+        return advertRepo.findAll(PageRequest.of(page, size));
+    }
+
+    public List<Advert> findAllSorted(Sort.Direction direction, String property) {
+        return advertRepo.findAll(Sort.by(direction, property));
     }
 
     public Advert findById(String id) {
