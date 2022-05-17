@@ -2,6 +2,7 @@ package com.service.advert.controller;
 
 import com.service.advert.entity.Advert;
 import com.service.advert.service.AdvertService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
@@ -21,14 +22,11 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("api/advert-service/advert")
 public class AdvertController {
 
     public final AdvertService advertService;
-
-    public AdvertController(AdvertService advertService) {
-        this.advertService = advertService;
-    }
 
     @GetMapping
     public List<Advert> findAll() {
