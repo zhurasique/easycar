@@ -20,6 +20,11 @@ zuul:
     socket-timeout-millis: 20000
 
   routes:
+    auth:
+      path: /uaa/**
+      url: http://auth:8800
+      stripPrefix: false
+      sensitiveHeaders:
     base-service:
       path: /api/base-service/**
       url: base-service

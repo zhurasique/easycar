@@ -4,6 +4,9 @@ spring:
       server:
         native:
           search-locations: classpath:/shared
+  security:
+    user:
+      password: password
   profiles:
     active: native
 

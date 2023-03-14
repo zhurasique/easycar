@@ -13,6 +13,7 @@ build_image() {
   cd ..
 }
 
+build_image auth
 build_image config
 build_image gateway
 build_image monitoring

@@ -8,6 +8,8 @@ services:
       interval: 10s
       timeout: 5s
       start_period: 15s
+    env_file:
+      - .env
     ports:
       - 8888:8888
 
@@ -47,6 +49,16 @@ services:
       - ./data:/data/db
     ports:
       - 27017:27017
+
+  auth:
+    image: auth
+    restart: always
+    depends_on:
+      - mongodb
+    env_file:
+      - .env
+    ports:
+      - 8800:8800
 
   base-service:
     image: base-service

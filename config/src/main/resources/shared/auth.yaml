@@ -1,0 +1,22 @@
+server:
+  servlet:
+    context-path: /uaa
+  port: 8800
+
+spring:
+  data:
+    mongodb:
+      host: mongodb
+      database: payer_auth
+      port: 27017
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${GOOGLE_CLIENTID}
+            client-secret: ${GOOGLE_SECRET}
+            redirect-uri-template: "${REDIRECT_URL}/uaa/oauth2/callback/{registrationId}"
+            scope:
+              - email
+              - profile
