@@ -24,7 +24,7 @@ public class AuthApplication {
     public CommandLineRunner insertUserData(UserRepository userRepository) {
         return (args) -> {
             User user = new User();
-            user.setUsername("user");
+            user.setUsername("user@gmail.com");
             user.setPassword("$2a$12$AXcFR1bWW55bQDUuqwmNyeWgiJgl5pmktHYMpd4xEqTCXYN5GTcly");
             User admin = new User();
             admin.setUsername("admin");

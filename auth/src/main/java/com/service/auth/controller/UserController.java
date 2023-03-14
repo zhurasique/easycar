@@ -21,18 +21,18 @@ public class UserController {
 	private final UserService userService;
 
 	@GetMapping(value = "/test")
-	public String getProductName() {
-		return "Test endpoint";
+	public String test() {
+		return "ok";
 	}
 
 	@GetMapping(value = "/current")
-	public Principal getUser(Principal principal) {
-		return principal;
+	public User getUser(Principal principal) throws Exception {
+		return userService.getUser(principal);
 	}
 
 	@PreAuthorize("#oauth2.hasScope('server')")
 	@PostMapping
 	public void createUser(@Valid @RequestBody User user) {
-		userService.create(user);
+		userService.createUser(user);
 	}
 }

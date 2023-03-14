@@ -1,20 +1,26 @@
 package com.service.auth.domain;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
+import java.util.Map;
 
 @Document(collection = "users")
-public class User implements UserDetails {
+public class User implements OAuth2User, UserDetails {
 
 	@Id
 	private String username;
+	@JsonIgnore
 	private String password;
-	private List<GrantedAuthority> authorities = new ArrayList<>();
+	private AuthProvider provider;
+
+	private Collection<? extends GrantedAuthority> authorities;
+	private Map<String, Object> attributes;
 
 	@Override
 	public String getPassword() {
@@ -26,12 +32,9 @@ public class User implements UserDetails {
 		return username;
 	}
 
-	@Override
-	public List<GrantedAuthority> getAuthorities() {
-		return authorities;
+	public AuthProvider getProvider() {
+		return provider;
 	}
-
-
 
 	public void setUsername(String username) {
 		this.username = username;
@@ -41,8 +44,18 @@ public class User implements UserDetails {
 		this.password = password;
 	}
 
-	public void setAuthorities(List<GrantedAuthority> authorities) {
-		this.authorities = authorities;
+	public void setProvider(AuthProvider provider) {
+		this.provider = provider;
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return authorities;
+	}
+
+	@Override
+	public Map<String, Object> getAttributes() {
+		return attributes;
 	}
 
 	@Override
@@ -63,5 +76,10 @@ public class User implements UserDetails {
 	@Override
 	public boolean isEnabled() {
 		return true;
+	}
+
+	@Override
+	public String getName() {
+		return username;
 	}
 }
