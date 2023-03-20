@@ -8,7 +8,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
+import org.springframework.security.oauth2.common.DefaultOAuth2RefreshToken;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
+import org.springframework.security.oauth2.common.OAuth2RefreshToken;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.OAuth2Request;
 import org.springframework.security.oauth2.provider.token.TokenStore;
@@ -36,8 +38,10 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
     private final TokenStore tokenStore;
     private final HttpCookieOAuth2AuthorizationRequestRepository httpCookieOAuth2AuthorizationRequestRepository;
 
-    @Value("${SECRET}")
-    private String secret;
+    @Value("${TOKEN_SECRET}")
+    private String tokenSecret;
+    @Value("${TOKEN_LIFETIME}")
+    private String tokenLifeTime;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
@@ -49,26 +53,28 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
     protected String determineTargetUrl(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
         Optional<String> redirectUri = CookieUtils.getCookie(request, REDIRECT_URI_PARAM_COOKIE_NAME)
                 .map(Cookie::getValue);
-
         String targetUrl = redirectUri.orElse(getDefaultTargetUrl());
-
         Date now = new Date();
-        Date expiryDate = new Date(now.getTime() + 40000);
+        Date expiryDate = new Date(now.getTime() + Integer.parseInt(tokenLifeTime));
         OAuth2AccessToken token = new DefaultOAuth2AccessToken(Jwts.builder()
                 .setSubject(((User) authentication.getPrincipal()).getUsername())
                 .setIssuedAt(new Date())
                 .setExpiration(expiryDate)
-                .signWith(SignatureAlgorithm.HS512, secret)
+                .signWith(SignatureAlgorithm.HS512, tokenSecret)
                 .compact());
-
+        OAuth2RefreshToken refreshToken = new DefaultOAuth2RefreshToken(Jwts.builder()
+                .setSubject(((User) authentication.getPrincipal()).getUsername())
+                .setIssuedAt(new Date())
+                .signWith(SignatureAlgorithm.HS512, tokenSecret)
+                .compact());
         OAuth2Authentication auth = new OAuth2Authentication(
                 new OAuth2Request(null, "browser", null, true, new HashSet<>(Arrays.asList("ui")), null, null, null, null),
                 authentication);
-
         tokenStore.storeAccessToken(token, auth);
-
+        tokenStore.storeRefreshToken(refreshToken, auth);
         return UriComponentsBuilder.fromUriString(targetUrl)
                 .queryParam("token", token)
+                .queryParam("refresh_token", refreshToken)
                 .build().toUriString();
     }
 
