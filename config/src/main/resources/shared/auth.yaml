@@ -20,3 +20,10 @@ spring:
             scope:
               - email
               - profile
+          facebook:
+            client-id: ${FACEBOOK_CLIENTID}
+            client-secret: ${FACEBOOK_SECRET}
+            redirect-uri-template: "${REDIRECT_URL}/uaa/oauth2/callback/{registrationId}"
+            scope:
+              - email
+              - public_profile

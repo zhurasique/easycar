@@ -1,10 +1,12 @@
 package com.service.auth.security.oauth2;
 
+import com.service.auth.client.AccountServiceClient;
 import com.service.auth.domain.AuthProvider;
 import com.service.auth.domain.User;
 import com.service.auth.repository.UserRepository;
 import com.service.auth.security.oauth2.user.OAuth2UserInfo;
 import com.service.auth.security.oauth2.user.OAuth2UserInfoFactory;
+import com.service.auth.vo.Account;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.core.AuthenticationException;
@@ -21,6 +23,7 @@ import java.util.Optional;
 public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
     private final UserRepository userRepo;
+    private final AccountServiceClient accountServiceClient;
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest oAuth2UserRequest) throws OAuth2AuthenticationException {
@@ -44,7 +47,19 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         User user = new User();
         user.setProvider(AuthProvider.valueOf(oAuth2UserRequest.getClientRegistration().getRegistrationId()));
         user.setUsername(oAuth2UserInfo.getEmail());
+        try {
+            accountServiceClient.findById(oAuth2UserInfo.getEmail());
+        } catch (Exception ex) {
+            registerNewAccount(oAuth2UserInfo);
+        }
         return userRepo.save(user);
     }
 
+    private void registerNewAccount(OAuth2UserInfo oAuth2UserInfo) {
+        Account account = new Account();
+        account.setUsername(oAuth2UserInfo.getEmail());
+        account.setName(oAuth2UserInfo.getName());
+        account.setSurname(oAuth2UserInfo.getSurname());
+        accountServiceClient.save(account);
+    }
 }

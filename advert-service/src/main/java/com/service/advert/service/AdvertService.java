@@ -2,7 +2,7 @@ package com.service.advert.service;
 
 import com.service.advert.client.BaseServiceClient;
 import com.service.advert.client.LocationServiceClient;
-import com.service.advert.client.UserServiceClient;
+import com.service.advert.client.AccountServiceClient;
 import com.service.advert.entity.Advert;
 import com.service.advert.exception.NoSuchElementFoundException;
 import com.service.advert.repository.AdvertRepo;
@@ -23,7 +23,7 @@ public class AdvertService {
     private final AdvertRepo advertRepo;
     private final BaseServiceClient baseServiceClient;
     private final LocationServiceClient locationServiceClient;
-    private final UserServiceClient userServiceClient;
+    private final AccountServiceClient accountServiceClient;
 
     public List<Advert> findAll() {
         return advertRepo.findAll();
@@ -76,7 +76,7 @@ public class AdvertService {
         advert.setActive(true);
         advert.setCar(baseServiceClient.saveCar(advert.getCar()));
         advert.setLocation(locationServiceClient.saveLocation(advert.getLocation()));
-        advert.setUser(userServiceClient.findById(advert.getUser().getId()));
+        advert.setAccount(accountServiceClient.findById(advert.getAccount().getUsername()));
         return advertRepo.save(advert);
     }
 }

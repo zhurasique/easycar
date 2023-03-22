@@ -1,19 +1,20 @@
-package com.service.user.entity;
+package com.service.account.entity;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 @Data
-public class User {
+public class Account {
     @Id
-    private String id;
+    private String username;
 
-    @Size(min = 10, max = 17)
     private String phoneNumber;
 
     @NotNull
     private String name;
+
+    @NotNull
+    private String surname;
 }
