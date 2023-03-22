@@ -5,6 +5,8 @@ import com.service.account.entity.Account;
 import com.service.account.exception.AccountExistsException;
 import com.service.account.repository.AccountRepo;
 import com.service.account.vo.AccountWrapper;
+import com.service.account.vo.AuthProvider;
+import com.service.account.vo.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,7 +32,9 @@ public class AccountService {
             throw new AccountExistsException(username);
         }
         if (!authServiceClient.isUserExists(accountWrapper.getUser().getUsername()).isExists()) {
-            authServiceClient.createUser(accountWrapper.getUser());
+            User user = accountWrapper.getUser();
+            user.setProvider(AuthProvider.local);
+            authServiceClient.createUser(user);
         }
         return accountRepo.save(accountWrapper.getAccount());
     }

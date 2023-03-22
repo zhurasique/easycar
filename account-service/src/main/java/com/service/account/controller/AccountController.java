@@ -9,9 +9,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 @RestController
@@ -20,14 +22,14 @@ public class AccountController {
 
     private final AccountService accountService;
 
-    @GetMapping("/{id}")
+    @GetMapping("{id}")
     public Optional<Account> findById(@PathVariable String id) {
         return accountService.findById(id);
     }
 
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
-    public Account save(@RequestBody AccountWrapper accountWrapper) {
+    public Account save(@Valid @RequestBody AccountWrapper accountWrapper) {
         return accountService.save(accountWrapper);
     }
 }
