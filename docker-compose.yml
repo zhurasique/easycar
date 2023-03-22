@@ -23,6 +23,8 @@ services:
       interval: 10s
       timeout: 5s
       start_period: 15s
+    env_file:
+      - .env
     ports:
       - 8761:8761
 
@@ -31,6 +33,8 @@ services:
     depends_on:
       registry:
         condition: service_healthy
+    env_file:
+      - .env
     ports:
       - 9295:9295
 
@@ -38,6 +42,8 @@ services:
     image: gateway
     depends_on:
       - monitoring
+    env_file:
+      - .env
     ports:
       - 9191:9191
 
@@ -64,6 +70,8 @@ services:
     image: base-service
     depends_on:
       - mongodb
+    env_file:
+      - .env
     ports:
       - 8081:8081
 
@@ -71,6 +79,8 @@ services:
     image: image-service
     depends_on:
       - mongodb
+    env_file:
+      - .env
     ports:
       - 8082:8082
 
@@ -78,6 +88,8 @@ services:
     image: location-service
     depends_on:
       - mongodb
+    env_file:
+      - .env
     ports:
       - 8083:8083
 
@@ -85,6 +97,8 @@ services:
     image: account-service
     depends_on:
       - mongodb
+    env_file:
+      - .env
     ports:
       - 8084:8084
 
@@ -92,5 +106,7 @@ services:
     image: advert-service
     depends_on:
       - mongodb
+    env_file:
+      - .env
     ports:
       - 8085:8085

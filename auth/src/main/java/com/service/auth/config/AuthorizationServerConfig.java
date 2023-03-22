@@ -2,6 +2,8 @@ package com.service.auth.config;
 
 import com.service.auth.service.security.MongoUserDetailsService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -24,11 +26,13 @@ import org.springframework.security.oauth2.provider.token.store.InMemoryTokenSto
 @RequiredArgsConstructor
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
+    @Qualifier("authenticationManagerBean")
     private final AuthenticationManager authenticationManager;
-
+    @Qualifier("passwordEncoderBean")
+    private final PasswordEncoder passwordEncoder;
     private final MongoUserDetailsService userDetailsService;
-
-    private final PasswordEncoder oauthClientPasswordEncoder;
+    @Value("${EASYCAR_PASSWORD}")
+    private String secret;
 
     @Bean
     public TokenStore tokenStore() {
@@ -42,7 +46,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
     @Override
     public void configure(AuthorizationServerSecurityConfigurer oauthServer) {
-        oauthServer.tokenKeyAccess("permitAll()").checkTokenAccess("isAuthenticated()").passwordEncoder(oauthClientPasswordEncoder);
+        oauthServer.tokenKeyAccess("permitAll()")
+                .checkTokenAccess("isAuthenticated()")
+                .passwordEncoder(passwordEncoder);
     }
 
     @Override
@@ -52,14 +58,16 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .authorizedGrantTypes("refresh_token", "password")
                 .scopes("ui")
                 .and()
-                .withClient("account")
-                .secret("password")
+                .withClient("account-service")
+                .secret(passwordEncoder.encode(secret))
                 .authorizedGrantTypes("client_credentials", "refresh_token")
-                .scopes("server");;
+                .scopes("server");
     }
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
-        endpoints.tokenStore(tokenStore()).authenticationManager(authenticationManager).userDetailsService(userDetailsService);
+        endpoints.tokenStore(tokenStore())
+                .authenticationManager(authenticationManager)
+                .userDetailsService(userDetailsService);
     }
 }

@@ -9,7 +9,6 @@ import javax.validation.constraints.NotNull;
 public class Account {
     @Id
     private String username;
-
     private String phoneNumber;
 
     @NotNull

@@ -5,5 +5,5 @@ spring:
   data:
     mongodb:
       host: mongodb
-      database: easycar__advert-service
+      database: easycar_advert
       port: 27017

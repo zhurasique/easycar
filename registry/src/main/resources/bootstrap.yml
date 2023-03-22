@@ -4,6 +4,9 @@ spring:
   cloud:
     config:
       uri: http://config:8888
+      fail-fast: true
+      password: ${EASYCAR_PASSWORD}
+      username: user
 
 eureka:
   instance:

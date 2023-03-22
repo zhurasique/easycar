@@ -68,8 +68,11 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
                 .signWith(SignatureAlgorithm.HS512, tokenSecret)
                 .compact());
         OAuth2Authentication auth = new OAuth2Authentication(
-                new OAuth2Request(null, "browser", null, true, new HashSet<>(Arrays.asList("ui")), null, null, null, null),
-                authentication);
+                new OAuth2Request(null, "browser",
+                        null, true,
+                        new HashSet<>(Arrays.asList("ui")), null,
+                        null, null,
+                        null), authentication);
         tokenStore.storeAccessToken(token, auth);
         tokenStore.storeRefreshToken(refreshToken, auth);
         return UriComponentsBuilder.fromUriString(targetUrl)

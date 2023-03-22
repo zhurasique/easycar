@@ -6,6 +6,7 @@ import com.service.advert.client.AccountServiceClient;
 import com.service.advert.entity.Advert;
 import com.service.advert.exception.NoSuchElementFoundException;
 import com.service.advert.repository.AdvertRepo;
+import com.service.advert.vo.Account;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -72,11 +73,13 @@ public class AdvertService {
 
     @Transactional
     public Advert save(Advert advert) {
+        String accountUserName = advert.getAccount().getUsername();
+        Account account = accountServiceClient.findById(accountUserName).orElseThrow(() -> new NoSuchElementFoundException(accountUserName));
         advert.setPostDateTime(LocalDateTime.now());
         advert.setActive(true);
         advert.setCar(baseServiceClient.saveCar(advert.getCar()));
         advert.setLocation(locationServiceClient.saveLocation(advert.getLocation()));
-        advert.setAccount(accountServiceClient.findById(advert.getAccount().getUsername()));
+        advert.setAccount(account);
         return advertRepo.save(advert);
     }
 }

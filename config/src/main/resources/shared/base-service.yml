@@ -5,5 +5,5 @@ spring:
   data:
     mongodb:
       host: mongodb
-      database: easycar__base-service
+      database: easycar_base
       port: 27017
