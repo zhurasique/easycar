@@ -1,7 +1,6 @@
-package com.service.account.advice;
+package com.service.auth.advice;
 
-import com.service.account.exception.AccountExistsException;
-import com.service.account.exception.NoSuchElementFoundException;
+import com.service.auth.exception.NoSuchElementFoundException;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.http.HttpStatus;
@@ -45,15 +44,6 @@ public class RestExceptionHandler {
     @ExceptionHandler(NoSuchElementFoundException.class)
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
     public Response handleNoSuchElementFoundException(NoSuchElementFoundException ex) {
-        return Response.builder()
-                .message(ex.getMessage())
-                .dateTime(LocalDateTime.now())
-                .build();
-    }
-
-    @ExceptionHandler(AccountExistsException.class)
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
-    public Response handleNoSuchElementFoundException(AccountExistsException ex) {
         return Response.builder()
                 .message(ex.getMessage())
                 .dateTime(LocalDateTime.now())

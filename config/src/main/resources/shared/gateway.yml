@@ -41,7 +41,7 @@ zuul:
       stripPrefix: false
       sensetiveHeaders:
     account-service:
-      path: /api/account-service/**
+      path: /account/**
       url: account-service
       stripPrefix: false
       sensetiveHeaders:

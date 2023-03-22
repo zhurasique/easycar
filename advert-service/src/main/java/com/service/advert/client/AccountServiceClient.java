@@ -6,9 +6,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.Optional;
+
 @FeignClient(name = "account-service")
-@RequestMapping("/api/account-service")
+@RequestMapping("account")
 public interface AccountServiceClient {
-    @GetMapping("/account/{id}")
-    Account findById(@PathVariable String id);
+    @GetMapping("/{id}")
+    Optional<Account> findById(@PathVariable String id);
 }

@@ -1,0 +1,24 @@
+server:
+  servlet:
+    context-path: /account
+  port: 8084
+
+security:
+  oauth2:
+    client:
+      clientId: account-service
+      clientSecret: ${EASYCAR_PASSWORD}
+      accessTokenUri: http://auth:8800/uaa/oauth/token
+      grant-type: client_credentials
+      scope: server
+
+spring:
+  data:
+    mongodb:
+      host: mongodb
+      database: easycar_account
+      port: 27017
+
+feign:
+  hystrix:
+    enabled: true

@@ -6,7 +6,7 @@ spring:
           search-locations: classpath:/shared
   security:
     user:
-      password: password
+      password: ${EASYCAR_PASSWORD}
   profiles:
     active: native
 
