@@ -81,8 +81,8 @@ services:
     ports:
       - 8083:8083
 
-  user-service:
-    image: user-service
+  account-service:
+    image: account-service
     depends_on:
       - mongodb
     ports:

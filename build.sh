@@ -21,7 +21,7 @@ build_image registry
 build_image base-service
 build_image image-service
 build_image location-service
-build_image user-service
+build_image account-service
 build_image advert-service
 
 if [[ $1 == "prune" ]]; then

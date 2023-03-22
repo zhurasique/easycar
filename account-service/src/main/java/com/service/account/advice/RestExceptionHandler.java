@@ -1,6 +1,6 @@
-package com.service.user.advice;
+package com.service.account.advice;
 
-import com.service.user.exception.NoSuchElementFoundException;
+import com.service.account.exception.NoSuchElementFoundException;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.http.HttpStatus;

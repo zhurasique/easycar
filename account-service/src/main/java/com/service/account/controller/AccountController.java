@@ -1,7 +1,7 @@
-package com.service.user.controller;
+package com.service.account.controller;
 
-import com.service.user.entity.User;
-import com.service.user.service.UserService;
+import com.service.account.entity.Account;
+import com.service.account.service.AccountService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,19 +16,19 @@ import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("api/user-service/user")
-public class UserController {
+@RequestMapping("api/account-service/account")
+public class AccountController {
 
-    private final UserService userService;
+    private final AccountService accountService;
 
     @GetMapping("{id}")
-    public User findById(@PathVariable String id) {
-        return userService.findById(id);
+    public Account findById(@PathVariable String id) {
+        return accountService.findById(id);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public User save(@Valid @RequestBody User user) {
-        return userService.save(user);
+    public Account save(@Valid @RequestBody Account account) {
+        return accountService.save(account);
     }
 }

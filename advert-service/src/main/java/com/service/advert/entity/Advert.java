@@ -1,8 +1,8 @@
 package com.service.advert.entity;
 
+import com.service.advert.vo.Account;
 import com.service.advert.vo.Car;
 import com.service.advert.vo.Location;
-import com.service.advert.vo.User;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 
@@ -38,7 +38,7 @@ public class Advert {
     private Car car;
 
     @NotNull
-    private User user;
+    private Account account;
 
     @NotNull
     private Location location;

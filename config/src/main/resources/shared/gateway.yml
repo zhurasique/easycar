@@ -40,9 +40,9 @@ zuul:
       url: location-service
       stripPrefix: false
       sensetiveHeaders:
-    user-service:
-      path: /api/user-service/**
-      url: user-service
+    account-service:
+      path: /api/account-service/**
+      url: account-service
       stripPrefix: false
       sensetiveHeaders:
     advert-service:

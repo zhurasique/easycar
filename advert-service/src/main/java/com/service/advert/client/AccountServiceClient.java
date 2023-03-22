@@ -1,14 +1,14 @@
 package com.service.advert.client;
 
-import com.service.advert.vo.User;
+import com.service.advert.vo.Account;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@FeignClient(name = "user-service")
-@RequestMapping("/api/user-service")
-public interface UserServiceClient {
-    @GetMapping("/user/{id}")
-    User findById(@PathVariable String id);
+@FeignClient(name = "account-service")
+@RequestMapping("/api/account-service")
+public interface AccountServiceClient {
+    @GetMapping("/account/{id}")
+    Account findById(@PathVariable String id);
 }
