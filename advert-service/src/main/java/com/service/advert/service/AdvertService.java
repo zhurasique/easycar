@@ -1,7 +1,6 @@
 package com.service.advert.service;
 
 import com.service.advert.client.BaseServiceClient;
-import com.service.advert.client.LocationServiceClient;
 import com.service.advert.client.AccountServiceClient;
 import com.service.advert.entity.Advert;
 import com.service.advert.exception.NoSuchElementFoundException;
@@ -23,7 +22,6 @@ public class AdvertService {
 
     private final AdvertRepo advertRepo;
     private final BaseServiceClient baseServiceClient;
-    private final LocationServiceClient locationServiceClient;
     private final AccountServiceClient accountServiceClient;
 
     public List<Advert> findAll() {
@@ -59,7 +57,7 @@ public class AdvertService {
         oldData.setActive(newData.isActive());
         oldData.setCurrency(newData.getCurrency());
         oldData.setCar(baseServiceClient.updateCar(oldData.getCar().getId(), newData.getCar()));
-        oldData.setLocation(locationServiceClient.updateLocation(oldData.getLocation().getId(), newData.getLocation()));
+        oldData.setLocation(baseServiceClient.updateLocation(oldData.getLocation().getId(), newData.getLocation()));
         return advertRepo.save(oldData);
     }
 
@@ -67,7 +65,7 @@ public class AdvertService {
     public void delete(String id) {
         Advert advert = findById(id);
         baseServiceClient.deleteCar(advert.getCar().getId());
-        locationServiceClient.deleteLocation(advert.getLocation().getId());
+        baseServiceClient.deleteLocation(advert.getLocation().getId());
         advertRepo.delete(advert);
     }
 
@@ -78,7 +76,7 @@ public class AdvertService {
         advert.setPostDateTime(LocalDateTime.now());
         advert.setActive(true);
         advert.setCar(baseServiceClient.saveCar(advert.getCar()));
-        advert.setLocation(locationServiceClient.saveLocation(advert.getLocation()));
+        advert.setLocation(baseServiceClient.saveLocation(advert.getLocation()));
         advert.setAccount(account);
         return advertRepo.save(advert);
     }

@@ -8,4 +8,5 @@ public class Account {
     private String phoneNumber;
     private String name;
     private String surname;
+    private String photo;
 }

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.Optional;
 
 @FeignClient(name = "account-service")
-@RequestMapping("account")
+@RequestMapping("/account")
 public interface AccountServiceClient {
     @GetMapping("/{id}")
     Optional<Account> findById(@PathVariable String id);

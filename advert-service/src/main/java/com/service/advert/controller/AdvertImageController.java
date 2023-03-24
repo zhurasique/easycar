@@ -48,7 +48,7 @@ public class AdvertImageController {
         advertService.deleteByAdvertId(id);
     }
 
-    @PostMapping("{advertId}")
+    @PostMapping("/{advertId}")
     public List<AdvertImage> save(@PathVariable String advertId, @RequestBody List<MultipartFile> images) throws IOException {
         return advertService.saveAll(advertId, images);
     }

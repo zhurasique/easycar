@@ -1,8 +1,8 @@
-package com.service.location.service;
+package com.service.base.service;
 
-import com.service.location.entity.Location;
-import com.service.location.exception.NoSuchElementFoundException;
-import com.service.location.repository.LocationRepo;
+import com.service.base.entity.Location;
+import com.service.base.exception.NoSuchElementFoundException;
+import com.service.base.repository.LocationRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
