@@ -12,6 +12,11 @@ ribbon:
 
 server:
   port: 9191
+  error:
+    include-message: always
+    include-binding-errors: always
+    include-stacktrace: on_trace_param
+    include-exception: false
 
 zuul:
   ignoredServices: '*'
@@ -25,34 +30,27 @@ zuul:
       url: http://auth:8800
       stripPrefix: false
       sensitiveHeaders:
-    base-service:
-      path: /api/base-service/**
-      url: base-service
-      stripPrefix: false
-      sensitiveHeaders:
-    image-service:
-      path: /api/image-service/**
-      url: image-service
-      stripPrefix: false
-      sensitiveHeaders:
-    location-service:
-      path: /api/location-service/**
-      url: location-service
-      stripPrefix: false
-      sensetiveHeaders:
+
     account-service:
       path: /account/**
-      url: account-service
+      serviceId: account-service
       stripPrefix: false
-      sensetiveHeaders:
+      sensitiveHeaders:
+
+    base-service:
+      path: /api/base-service/**
+      serviceId: base-service
+      stripPrefix: false
+      sensitiveHeaders:
+
+    image-service:
+      path: /api/image-service/**
+      serviceId: image-service
+      stripPrefix: false
+      sensitiveHeaders:
+
     advert-service:
       path: /api/advert-service/**
-      url: advert-service
+      serviceId: advert-service
       stripPrefix: false
-      sensetiveHeaders:
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: hystrix.stream
+      sensitiveHeaders:

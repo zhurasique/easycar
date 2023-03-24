@@ -35,10 +35,6 @@ public class UserService {
 		return exists;
 	}
 
-	public User getUser(Principal principal) {
-		return userRepo.findById(principal.getName()).orElseThrow(() -> new NoSuchElementFoundException(principal.getName()));
-	}
-
 	public void createUser(User user) {
 		Optional<User> existing = userRepo.findById(user.getUsername());
 		existing.ifPresent(it -> {

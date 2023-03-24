@@ -1,4 +1,4 @@
-package com.service.location.entity;
+package com.service.base.entity;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
@@ -6,13 +6,13 @@ import org.springframework.data.annotation.Id;
 import javax.validation.constraints.NotNull;
 
 @Data
-public class Location {
+public class City {
     @Id
     private String id;
 
     @NotNull
-    private String streetName;
+    private String name;
 
     @NotNull
-    private City city;
+    private Region region;
 }

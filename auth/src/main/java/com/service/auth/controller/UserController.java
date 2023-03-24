@@ -34,8 +34,8 @@ public class UserController {
 	}
 
 	@GetMapping(value = "/current")
-	public User getUser(Principal principal) {
-		return userService.getUser(principal);
+	public Principal getUser(Principal principal) {
+		return principal;
 	}
 
 	@PreAuthorize("#oauth2.hasScope('server')")

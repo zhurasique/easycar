@@ -1,6 +1,11 @@
 version: '3.9'
 
 services:
+  rabbitmq:
+    image: rabbitmq
+    ports:
+      - 5672:5672
+
   config:
     image: config
     healthcheck:
@@ -83,15 +88,6 @@ services:
       - .env
     ports:
       - 8082:8082
-
-  location-service:
-    image: location-service
-    depends_on:
-      - mongodb
-    env_file:
-      - .env
-    ports:
-      - 8083:8083
 
   account-service:
     image: account-service

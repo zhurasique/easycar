@@ -56,6 +56,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         account.setUsername(oAuth2UserInfo.getEmail());
         account.setName(oAuth2UserInfo.getName());
         account.setSurname(oAuth2UserInfo.getSurname());
+        account.setPhoto(oAuth2UserInfo.getImageUrl());
         AccountWrapper accountWrapper = new AccountWrapper();
         accountWrapper.setUser(user);
         accountWrapper.setAccount(account);
