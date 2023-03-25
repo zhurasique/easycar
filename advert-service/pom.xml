@@ -10,8 +10,8 @@
     <name>advert-service</name>
 
     <parent>
-        <artifactId>easy-car</artifactId>
-        <groupId>com.easy-car</groupId>
+        <artifactId>easycar</artifactId>
+        <groupId>com.easycar</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 

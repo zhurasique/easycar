@@ -1,5 +1,6 @@
 package com.service.auth.security.oauth2;
 
+import com.google.api.client.util.Base64;
 import com.service.auth.client.AccountServiceClient;
 import com.service.auth.domain.AuthProvider;
 import com.service.auth.domain.User;
@@ -18,6 +19,9 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.Optional;
 
 @Service
@@ -56,11 +60,23 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         account.setUsername(oAuth2UserInfo.getEmail());
         account.setName(oAuth2UserInfo.getName());
         account.setSurname(oAuth2UserInfo.getSurname());
-        account.setPhoto(oAuth2UserInfo.getImageUrl());
+        try {
+            account.setPhoto(getBase64EncodedImage(oAuth2UserInfo.getImageUrl()));
+        } catch (IOException ex) {
+            account.setPhoto(null);
+            ex.printStackTrace();
+        }
         AccountWrapper accountWrapper = new AccountWrapper();
         accountWrapper.setUser(user);
         accountWrapper.setAccount(account);
         accountServiceClient.save(accountWrapper);
         return user;
+    }
+
+    public String getBase64EncodedImage(String imageURL) throws IOException {
+        URL url = new URL(imageURL);
+        InputStream is = url.openStream();
+        byte[] bytes = org.apache.commons.io.IOUtils.toByteArray(is);
+        return Base64.encodeBase64String(bytes);
     }
 }
