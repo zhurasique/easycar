@@ -1,3 +1,7 @@
+logging:
+  level:
+    org.springframework.security: INFO
+
 hystrix:
   command:
     default:
@@ -17,3 +21,7 @@ security:
   oauth2:
     resource:
       user-info-uri: http://auth:8800/uaa/user/current
+
+spring:
+  rabbitmq:
+    host: rabbitmq

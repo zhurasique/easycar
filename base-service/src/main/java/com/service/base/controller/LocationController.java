@@ -1,7 +1,7 @@
-package com.service.location.controller;
+package com.service.base.controller;
 
-import com.service.location.entity.Location;
-import com.service.location.service.LocationService;
+import com.service.base.entity.Location;
+import com.service.base.service.LocationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,7 +19,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("api/location-service/location")
+@RequestMapping("api/base-service/location")
 public class LocationController {
 
     private final LocationService locationService;

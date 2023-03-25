@@ -1,6 +1,6 @@
-package com.service.location.repository;
+package com.service.base.repository;
 
-import com.service.location.entity.City;
+import com.service.base.entity.City;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;

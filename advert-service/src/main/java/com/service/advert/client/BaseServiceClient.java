@@ -1,6 +1,7 @@
 package com.service.advert.client;
 
 import com.service.advert.vo.Car;
+import com.service.advert.vo.Location;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,4 +25,13 @@ public interface BaseServiceClient {
 
     @PostMapping("/car")
     Car saveCar(@RequestBody Car car);
+
+    @PostMapping("/location")
+    Location saveLocation(@RequestBody Location location);
+
+    @DeleteMapping("/location/{id}")
+    void deleteLocation(@PathVariable String id);
+
+    @PutMapping("/location/{id}")
+    Location updateLocation(@PathVariable String id, @RequestBody Location newData);
 }

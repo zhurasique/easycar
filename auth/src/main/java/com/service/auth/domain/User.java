@@ -1,13 +1,14 @@
 package com.service.auth.domain;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
-import java.util.Collection;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Document(collection = "users")
@@ -15,12 +16,11 @@ public class User implements OAuth2User, UserDetails {
 
 	@Id
 	private String username;
-	@JsonIgnore
 	private String password;
 	private AuthProvider provider;
 
-	private Collection<? extends GrantedAuthority> authorities;
-	private Map<String, Object> attributes;
+	private List<GrantedAuthority> authorities = new ArrayList<>();
+	private Map<String, Object> attributes = new HashMap<>();
 
 	@Override
 	public String getPassword() {
@@ -49,13 +49,21 @@ public class User implements OAuth2User, UserDetails {
 	}
 
 	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
+	public List<GrantedAuthority> getAuthorities() {
 		return authorities;
+	}
+
+	public void setAuthorities(List<GrantedAuthority> authorities) {
+		this.authorities = authorities;
 	}
 
 	@Override
 	public Map<String, Object> getAttributes() {
 		return attributes;
+	}
+
+	public void setAttributes(Map<String, Object> attributes) {
+		this.attributes = attributes;
 	}
 
 	@Override

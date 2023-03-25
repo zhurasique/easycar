@@ -16,4 +16,7 @@ public class Account {
 
     @NotNull
     private String surname;
+
+    @NotNull
+    private String photo;
 }

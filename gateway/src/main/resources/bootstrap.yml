@@ -5,5 +5,5 @@ spring:
     config:
       uri: http://config:8888
       fail-fast: true
-      password: $2a$12$AXcFR1bWW55bQDUuqwmNyeWgiJgl5pmktHYMpd4xEqTCXYN5GTcly
+      password: ${EASYCAR_PASSWORD}
       username: user

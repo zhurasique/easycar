@@ -1,7 +1,7 @@
-package com.service.location.controller;
+package com.service.base.controller;
 
-import com.service.location.entity.Region;
-import com.service.location.service.RegionService;
+import com.service.base.entity.City;
+import com.service.base.service.CityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,24 +17,24 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("api/location-service/region")
-public class RegionController {
+@RequestMapping("api/base-service/city")
+public class CityController {
 
-    private final RegionService regionService;
+    private final CityService cityService;
 
-    @GetMapping
-    public List<Region> findAll() {
-        return regionService.findAll();
+    @GetMapping("/region/{id}")
+    public List<City> findByRegionId(@PathVariable String id) {
+        return cityService.findByRegionId(id);
     }
 
     @GetMapping("{id}")
-    public Region findById(@PathVariable String id) {
-        return regionService.findById(id);
+    public City findById(@PathVariable String id) {
+        return cityService.findById(id);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Region save(@Valid @RequestBody Region region) {
-        return regionService.save(region);
+    public City save(@Valid @RequestBody City city) {
+        return cityService.save(city);
     }
 }
