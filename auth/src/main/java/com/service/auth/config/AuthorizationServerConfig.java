@@ -33,6 +33,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     private final MongoUserDetailsService userDetailsService;
     @Value("${EASYCAR_PASSWORD}")
     private String secret;
+    @Value("${TOKEN_LIFETIME}")
+    private String tokenLifeTime;
 
     @Bean
     public TokenStore tokenStore() {
@@ -57,7 +59,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .withClient("browser")
                 .authorizedGrantTypes("refresh_token", "password")
                 .scopes("ui")
-                .and()
+                .accessTokenValiditySeconds(Integer.parseInt(tokenLifeTime))
+              .and()
                 .withClient("account-service")
                 .secret(passwordEncoder.encode(secret))
                 .authorizedGrantTypes("client_credentials", "refresh_token")
