@@ -18,7 +18,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("api/advert-service/advert-image")
+@RequestMapping("/advert-image")
 public class AdvertImageController {
 
     private final AdvertImageService advertService;

@@ -17,7 +17,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("api/base-service/generation")
+@RequestMapping("/generation")
 public class GenerationController {
 
     private final GenerationService generationService;

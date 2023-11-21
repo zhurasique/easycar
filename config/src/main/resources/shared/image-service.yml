@@ -1,4 +1,6 @@
 server:
+  servlet:
+    context-path: /api/v1/image
   port: 8082
 
 spring:

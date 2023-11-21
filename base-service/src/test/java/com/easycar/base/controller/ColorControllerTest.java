@@ -23,7 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(ColorController.class)
 public class ColorControllerTest {
 
-    private static final String BASE_ENDPOINT = "/api/base-service/color";
+    private static final String BASE_ENDPOINT = "/api/v1/base/color";
     private static final ObjectMapper mapper = new ObjectMapper();
 
     @Autowired

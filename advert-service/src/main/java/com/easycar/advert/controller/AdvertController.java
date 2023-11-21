@@ -23,7 +23,6 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("api/advert-service/advert")
 public class AdvertController {
 
     public final AdvertService advertService;

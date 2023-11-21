@@ -1,4 +1,15 @@
+security:
+  oauth2:
+    client:
+      clientId: advert-service
+      clientSecret: ${EASYCAR_PASSWORD}
+      accessTokenUri: http://auth:8800/uaa/oauth/token
+      grant-type: client_credentials
+      scope: server
+
 server:
+  servlet:
+    context-path: /api/v1/advert
   port: 8085
 
 spring:

@@ -20,7 +20,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @Validated
-@RequestMapping("api/advert-service/exchange")
+@RequestMapping("/exchange")
 public class ExchangeController {
 
     private final ExchangeService exchangeService;

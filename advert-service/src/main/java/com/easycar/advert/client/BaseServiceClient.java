@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @FeignClient(name = "base-service")
-@RequestMapping("/api/base-service")
+@RequestMapping("/api/v1/base")
 public interface BaseServiceClient {
     @GetMapping("/car/{id}")
     Car findCarById(@PathVariable String id);
