@@ -19,30 +19,27 @@ import java.io.IOException;
 
 @RestController
 @RequiredArgsConstructor
+@PreAuthorize("#oauth2.hasScope('server') or hasAuthority('ROLE_ADMIN')")
 public class ImageController {
 
     private final ImageService imageService;
 
-    @PreAuthorize("#oauth2.hasScope('server')")
     @GetMapping("{id}")
     public Image findById(@PathVariable("id") String id) {
         return imageService.findById(id);
     }
 
-    @PreAuthorize("#oauth2.hasScope('server')")
     @DeleteMapping("{id}")
     public void delete(@PathVariable String id) {
         imageService.delete(id);
     }
 
-    @PreAuthorize("#oauth2.hasScope('server')")
     @PostMapping("/base64")
     @ResponseStatus(value = HttpStatus.CREATED)
     public Image save(@RequestBody byte[] imageBytes) {
         return imageService.save(imageBytes);
     }
 
-    @PreAuthorize("#oauth2.hasScope('server')")
     @PostMapping
     @ResponseStatus(value = HttpStatus.CREATED)
     public Image save(@Valid MultipartFile image) throws IOException {
