@@ -5,7 +5,6 @@ import com.easycar.account.service.AccountService;
 import com.easycar.account.vo.AccountWrapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,12 +25,6 @@ public class AccountController {
     @GetMapping("/{id}")
     public Optional<Account> findById(@PathVariable String id) {
         return accountService.findById(id);
-    }
-
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
-    @GetMapping("/test")
-    public String test() {
-        return "test";
     }
 
     @GetMapping("/current")

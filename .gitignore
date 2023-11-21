@@ -14,3 +14,6 @@ data
 
 # MacOS specific
 .DS_Store
+
+# Project specific
+.env
