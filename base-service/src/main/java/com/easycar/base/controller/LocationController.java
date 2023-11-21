@@ -4,6 +4,7 @@ import com.easycar.base.entity.Location;
 import com.easycar.base.service.LocationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,18 +36,21 @@ public class LocationController {
     }
 
     @PutMapping("{id}")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public Location update(@PathVariable String id,
                            @Valid @RequestBody Location newData) {
         return locationService.update(id, newData);
     }
 
     @DeleteMapping("{id}")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public void delete(@PathVariable String id) {
         locationService.delete(id);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public Location save(@Valid @RequestBody Location location) {
         return locationService.save(location);
     }
