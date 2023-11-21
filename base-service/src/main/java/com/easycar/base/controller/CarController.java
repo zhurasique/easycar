@@ -18,7 +18,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("api/base-service/car")
+@RequestMapping("/car")
 public class CarController {
 
     private final CarService carService;

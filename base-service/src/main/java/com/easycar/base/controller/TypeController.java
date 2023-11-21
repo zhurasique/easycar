@@ -17,7 +17,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("api/base-service/type")
+@RequestMapping("/type")
 public class TypeController {
 
     private final TypeService typeService;

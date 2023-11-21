@@ -64,7 +64,13 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .withClient("account-service")
                 .secret(passwordEncoder.encode(secret))
                 .authorizedGrantTypes("client_credentials", "refresh_token")
-                .scopes("server");
+                .scopes("server")
+              .and()
+                .withClient("advert-service")
+                .secret(passwordEncoder.encode(secret))
+                .authorizedGrantTypes("client_credentials", "refresh_token")
+                .scopes("server")
+        ;
     }
 
     @Override

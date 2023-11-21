@@ -38,19 +38,19 @@ zuul:
       sensitiveHeaders:
 
     base-service:
-      path: /api/base-service/**
+      path: /api/v1/base/**
       serviceId: base-service
       stripPrefix: false
       sensitiveHeaders:
 
     image-service:
-      path: /api/image-service/**
+      path: /api/v1/image/**
       serviceId: image-service
       stripPrefix: false
       sensitiveHeaders:
 
     advert-service:
-      path: /api/advert-service/**
+      path: /api/v1/advert/**
       serviceId: advert-service
       stripPrefix: false
       sensitiveHeaders:

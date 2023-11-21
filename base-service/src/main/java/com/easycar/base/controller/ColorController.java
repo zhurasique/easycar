@@ -17,7 +17,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/base-service/color")
+@RequestMapping("/color")
 public class ColorController {
 
     private final ColorService colorService;

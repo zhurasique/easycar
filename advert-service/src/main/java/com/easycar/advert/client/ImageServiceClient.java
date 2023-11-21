@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @FeignClient(name = "image-service")
-@RequestMapping("/api/image-service")
+@RequestMapping("/api/v1/image")
 public interface ImageServiceClient {
-    @PostMapping("/image/base64")
+    @PostMapping("/base64")
     Image save(byte[] imageBytes);
 
-    @DeleteMapping("/image/{id}")
+    @DeleteMapping("/{id}")
     void delete(@PathVariable String id);
 }
