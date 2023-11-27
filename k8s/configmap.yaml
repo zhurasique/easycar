@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configmap
+data:
+  GOOGLE_SECRET: "set"
+  GOOGLE_CLIENTID: "set"
+  FACEBOOK_SECRET: "set"
+  FACEBOOK_CLIENTID: "set"
+  REDIRECT_URL: "set"
+  TOKEN_SECRET: "set"
+  TOKEN_LIFETIME: "set"
+  EASYCAR_PASSWORD: "password"
