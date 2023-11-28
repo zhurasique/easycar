@@ -40,7 +40,6 @@ public class UserService {
 		});
 		String hash = encoder.encode(user.getPassword());
 		user.setPassword(hash);
-		user.setRoles(new String[]{"USER"});
 		userRepo.save(user);
 	}
 }

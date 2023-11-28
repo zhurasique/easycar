@@ -31,6 +31,7 @@ public class UserController {
 		return userService.findById(id);
 	}
 
+	@PreAuthorize("#oauth2.hasScope('server')")
 	@GetMapping(value = "/exists/{id}")
 	public Exists isUserExists(@PathVariable String id) {
 		return userService.isUserExists(id);

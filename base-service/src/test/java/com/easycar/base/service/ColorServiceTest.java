@@ -1,7 +1,7 @@
 package com.easycar.base.service;
 
 import com.easycar.base.entity.Color;
-import com.easycar.base.exception.NoSuchElementFoundException;
+import com.easycar.common.exception.NoSuchElementFoundException;
 import com.easycar.base.repository.ColorRepo;
 import org.junit.Before;
 import org.junit.Test;
