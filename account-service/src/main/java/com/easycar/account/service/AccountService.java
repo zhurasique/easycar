@@ -41,6 +41,7 @@ public class AccountService {
         if (!authServiceClient.isUserExists(accountWrapper.getUser().getUsername()).isExists()) {
             User user = accountWrapper.getUser();
             user.setProvider(AuthProvider.local);
+            user.setRoles(new String[]{"USER"});
             authServiceClient.createUser(user);
         }
         return accountRepo.save(accountWrapper.getAccount());
