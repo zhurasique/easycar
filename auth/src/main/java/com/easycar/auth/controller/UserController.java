@@ -1,6 +1,5 @@
 package com.easycar.auth.controller;
 
-import com.easycar.auth.client.AccountServiceClient;
 import com.easycar.auth.domain.User;
 import com.easycar.auth.service.UserService;
 import com.easycar.auth.vo.Exists;
@@ -23,11 +22,15 @@ import java.util.Optional;
 public class UserController {
 
 	private final UserService userService;
-	private final AccountServiceClient accountServiceClient;
 
+	@GetMapping(value = "/current")
+	public Principal getUser(Principal principal) {
+		return principal;
+	}
+
+	@PreAuthorize("#oauth2.hasScope('server')")
 	@GetMapping(value = "/{id}")
 	public Optional<User> findById(@PathVariable String id) {
-		accountServiceClient.findById("a");
 		return userService.findById(id);
 	}
 
@@ -35,11 +38,6 @@ public class UserController {
 	@GetMapping(value = "/exists/{id}")
 	public Exists isUserExists(@PathVariable String id) {
 		return userService.isUserExists(id);
-	}
-
-	@GetMapping(value = "/current")
-	public Principal getUser(Principal principal) {
-		return principal;
 	}
 
 	@PreAuthorize("#oauth2.hasScope('server')")

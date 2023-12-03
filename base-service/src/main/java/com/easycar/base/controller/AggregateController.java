@@ -14,7 +14,7 @@ import java.util.Map;
 @RequestMapping("/aggregate")
 public class AggregateController {
 
-    private AggregateService aggregateService;
+    private final AggregateService aggregateService;
 
     @GetMapping("/brands-regions")
     public ResponseEntity<Map<String, Object>> getBrandsAndRegions() {

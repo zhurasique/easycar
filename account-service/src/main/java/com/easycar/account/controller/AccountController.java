@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -28,7 +29,7 @@ public class AccountController {
     }
 
     @GetMapping("/current")
-    public Account findByPrincipal(Principal principal) {
+    public Map<String, Object> findByPrincipal(Principal principal) {
         return accountService.findByPrincipal(principal);
     }
 
