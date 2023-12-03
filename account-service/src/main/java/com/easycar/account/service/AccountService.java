@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.security.Principal;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -26,9 +28,15 @@ public class AccountService {
         return accountRepo.findById(id);
     }
 
-    public Account findByPrincipal(Principal principal) {
-        return accountRepo.findById(principal.getName()).orElseThrow(
+    public Map<String, Object> findByPrincipal(Principal principal) {
+        Account account = accountRepo.findById(principal.getName()).orElseThrow(
                 () -> new NoSuchElementFoundException(principal.getName()));
+        Map<String, Object> detailedAccount = new HashMap<>();
+        detailedAccount.put("account", account);
+        User user = authServiceClient.findById(principal.getName()).orElseThrow(
+                () -> new NoSuchElementFoundException(principal.getName()));
+        detailedAccount.put("roles", user.getRoles());
+        return detailedAccount;
     }
 
     @Transactional
